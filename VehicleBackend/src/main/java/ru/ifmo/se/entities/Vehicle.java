@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.time.Instant;
@@ -49,7 +50,7 @@ public class Vehicle {
     private Integer capacity;
 
     @NotNull(message = "Поле 'distanceTravelled' не может быть null")
-    @Positive(message = "Значение поля 'distanceTravelled' должно быть больше 0")
+    @PositiveOrZero(message = "Значение поля 'distanceTravelled' должно быть больше или равно 0")
     private Double distanceTravelled;
 
     @NotNull(message = "Поле 'fuelConsumption' не может быть null")

@@ -69,7 +69,7 @@ public class VehicleResource {
     }
 
     @GET
-    @Path("/special/group-by-fuel")
+    @Path("/special/group-by-fuel-consumption")
     public Response getGroupByFuelConsumption() {
         return Response.ok(vehicleService.groupVehiclesByFuelConsumption()).build();
     }

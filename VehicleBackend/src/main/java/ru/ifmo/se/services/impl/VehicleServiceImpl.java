@@ -54,8 +54,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public VehicleResponse saveVehicle(VehicleRequest request) {
         vehicleValidator.validateRequest(request);
-        Vehicle vehicle = vehicleMapper.fromDto(request);
-        return vehicleMapper.toDto(vehicleRepository.saveVehicle(vehicle));
+        return vehicleMapper.toDto(vehicleRepository.saveVehicle(vehicleMapper.fromDto(request)));
     }
 
     @Override
@@ -89,7 +88,7 @@ public class VehicleServiceImpl implements VehicleService {
             List<DatabaseFunctionResult> results = vehicleRepository.findByFuelTypeLessThan(FuelType.fromValue(fuelType));
 
             return results.stream()
-                    .map(vehicleMapper::toDtoFromResult)
+                    .map(vehicleMapper::toResponseFromFunctionResult)
                     .filter(Objects::nonNull)
                     .toList();
         } catch (IllegalArgumentException e) {
@@ -101,7 +100,7 @@ public class VehicleServiceImpl implements VehicleService {
     public List<VehicleResponse> findByEnginePowerRange(Double min, Double max) {
         List<DatabaseFunctionResult> results = vehicleRepository.findByEnginePowerRange(min, max);
         return results.stream()
-                .map(vehicleMapper::toDtoFromResult)
+                .map(vehicleMapper::toResponseFromFunctionResult)
                 .filter(Objects::nonNull)
                 .toList();
     }

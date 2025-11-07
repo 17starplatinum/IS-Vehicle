@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import ru.ifmo.se.entities.FuelType;
 import ru.ifmo.se.entities.VehicleType;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 @Data

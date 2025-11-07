@@ -37,9 +37,9 @@ public interface VehicleMapper {
     default VehicleResponse toResponseFromFunctionResult(DatabaseFunctionResult result) {
         try {
             CoordinatesResponse coordinates = new CoordinatesResponse(
-                    result.get(3, Long.class),
-                    result.get(4, Long.class),
-                    result.get(5, Double.class)
+                    result.get(3, Long.class),                                                                  // id
+                    result.get(4, Long.class),                                                                  // x
+                    result.get(5, Double.class)                                                                 // y
             );
 
             return new VehicleResponse(
