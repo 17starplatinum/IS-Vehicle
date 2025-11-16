@@ -4,7 +4,6 @@ import jakarta.data.exceptions.MappingException;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.slf4j.Logger;
 import ru.ifmo.se.dto.requests.VehicleRequest;
 import ru.ifmo.se.dto.responses.CoordinatesResponse;
 import ru.ifmo.se.dto.responses.DatabaseFunctionResult;
@@ -21,11 +20,13 @@ import java.util.Objects;
 
 @Mapper(componentModel = "cdi")
 public interface VehicleMapper {
-
+    @Mapping(target = "coordinatesResponse", source = "coordinates")
     VehicleResponse toDto(Vehicle vehicle);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "creationDate", ignore = true)
+    @Mapping(target = "coordinates", source = "coordinates")
+    @Mapping(target = "coordinates.id", ignore = true)
     @Mapping(target = "type", qualifiedByName = "vehicleTypeConverter")
     @Mapping(target = "fuelType", qualifiedByName = "fuelTypeConverter")
     Vehicle fromDto(VehicleRequest vehicleRequest);

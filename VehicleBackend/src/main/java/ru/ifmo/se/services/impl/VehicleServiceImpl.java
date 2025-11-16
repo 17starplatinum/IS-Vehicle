@@ -1,6 +1,5 @@
 package ru.ifmo.se.services.impl;
 
-import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import ru.ifmo.se.dto.requests.VehicleRequest;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-@Stateless
 @ApplicationScoped
 public class VehicleServiceImpl implements VehicleService {
 

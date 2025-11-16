@@ -25,7 +25,7 @@ public class Vehicle {
     @NotBlank(message = "Поле 'name' не может быть null и пустым")
     private String name;
 
-    @OneToOne(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "coordinates_id", nullable = false, referencedColumnName = "id")
     private Coordinates coordinates;
 

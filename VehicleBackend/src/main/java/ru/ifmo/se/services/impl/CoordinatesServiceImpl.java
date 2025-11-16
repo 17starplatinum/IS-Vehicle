@@ -1,6 +1,5 @@
 package ru.ifmo.se.services.impl;
 
-import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import ru.ifmo.se.dto.requests.CoordinatesRequest;
@@ -14,7 +13,6 @@ import ru.ifmo.se.validation.CoordinatesValidator;
 
 import java.util.*;
 
-@Stateless
 @ApplicationScoped
 public class CoordinatesServiceImpl implements CoordinatesService {
 

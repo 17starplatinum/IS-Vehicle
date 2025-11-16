@@ -13,23 +13,7 @@ services:
       - "5434:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-    networks:
-      - vehicle_network
-
-  flyway:
-    image: flyway/flyway
-    volumes:
-      - ./src/main/resources/db/migrations:/flyway/db/migrations
-    command: -url=jdbc:postgresql://localhost:5434/vehicles -user=${DB_USERNAME} -password=${DB_PASSWORD} migrate
-    depends_on:
-      - postgres
-    networks:
-      - vehicle_network
 
 volumes:
   db_data:
     driver: local
-
-networks:
-  vehicle_network:
-    driver: bridge

@@ -1,6 +1,5 @@
 package ru.ifmo.se.repositories.impl;
 
-import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,7 +17,6 @@ import ru.ifmo.se.repositories.api.CoordinatesRepository;
 
 import java.util.*;
 
-@Stateless
 @ApplicationScoped
 public class CoordinatesRepositoryImpl implements CoordinatesRepository {
 
