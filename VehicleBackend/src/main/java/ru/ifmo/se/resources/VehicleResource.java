@@ -5,11 +5,10 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import ru.ifmo.se.dto.requests.VehicleRequest;
+import ru.ifmo.se.dto.responses.PageResponse;
 import ru.ifmo.se.dto.responses.VehicleResponse;
 import ru.ifmo.se.services.api.VehicleService;
 import ru.ifmo.se.websocket.VehicleWebSocket;
-
-import java.util.List;
 
 @Path("/vehicles")
 @Produces(MediaType.APPLICATION_JSON)
@@ -27,7 +26,7 @@ public class VehicleResource {
                                 @QueryParam("sortBy") @DefaultValue("id") String sortBy,
                                 @QueryParam("ascending") @DefaultValue("true") boolean ascending) {
 
-        List<VehicleResponse> vehicles = vehicleService.getVehicles(page, size, sortBy, ascending);
+        PageResponse<VehicleResponse> vehicles = vehicleService.getVehicles(page, size, sortBy, ascending);
         return Response.ok(vehicles, MediaType.APPLICATION_JSON).build();
     }
 

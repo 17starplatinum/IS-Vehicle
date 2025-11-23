@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import ru.ifmo.se.dto.requests.CoordinatesRequest;
 import ru.ifmo.se.dto.responses.CoordinatesResponse;
+import ru.ifmo.se.dto.responses.PageResponse;
 import ru.ifmo.se.entities.Coordinates;
 import ru.ifmo.se.exceptions.NotFoundException;
 import ru.ifmo.se.mappers.CoordinatesMapper;
@@ -26,13 +27,14 @@ public class CoordinatesServiceImpl implements CoordinatesService {
     private CoordinatesValidator coordinatesValidator;
 
     @Override
-    public List<CoordinatesResponse> getCoordinates(Integer page, Integer size, String sortBy, Boolean ascending) {
+    public PageResponse<CoordinatesResponse> getCoordinates(Integer page, Integer size, String sortBy, Boolean ascending) {
         ascending = coordinatesValidator.validateGetParameters(page, size, ascending);
-        if (coordinatesValidator.isValidSortField(sortBy)) {
+        if (!coordinatesValidator.isValidSortField(sortBy)) {
             throw new IllegalArgumentException("Sorting field is not valid. Must be one of: id, x, y");
         }
         List<Coordinates> coordinatesList = coordinatesRepository.getCoordinates(page, size, sortBy, ascending);
-        return coordinatesMapper.toDtoList(coordinatesList);
+        long total = coordinatesRepository.countAllEntities();
+        return coordinatesMapper.toDtoPage(coordinatesMapper.toDtoList(coordinatesList), page, size, total);
     }
 
     @Override

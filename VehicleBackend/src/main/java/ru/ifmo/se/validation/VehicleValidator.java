@@ -3,6 +3,7 @@ package ru.ifmo.se.validation;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.ValidationException;
+import lombok.Getter;
 import ru.ifmo.se.dto.requests.VehicleRequest;
 import ru.ifmo.se.entities.FuelType;
 import ru.ifmo.se.entities.VehicleType;
@@ -19,6 +20,12 @@ public class VehicleValidator implements RequestValidator<VehicleRequest> {
     @Inject
     private CoordinatesValidator coordinatesValidator;
 
+    @Getter
+    Set<String> validFields = new HashSet<>(Arrays.asList(
+            "id", "name", "type", "enginePower", "numberOfWheels",
+            "capacity", "distanceTravelled", "fuelConsumption", "fuelType",
+            "coordinatesId"
+    ));
     @Override
     public void validateId(Long id) {
         if (id == null) {
@@ -45,11 +52,6 @@ public class VehicleValidator implements RequestValidator<VehicleRequest> {
 
     @Override
     public boolean isValidSortField(String field) {
-        Set<String> validFields = new HashSet<>(Arrays.asList(
-                "id", "name", "type", "enginePower", "numberOfWheels",
-                "capacity", "distanceTravelled", "fuelConsumption", "fuelType",
-                "coordinatesId"
-        ));
         return validFields.contains(field);
     }
 

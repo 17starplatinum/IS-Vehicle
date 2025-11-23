@@ -1,13 +1,14 @@
 package ru.ifmo.se.services.api;
 
 import ru.ifmo.se.dto.requests.VehicleRequest;
+import ru.ifmo.se.dto.responses.PageResponse;
 import ru.ifmo.se.dto.responses.VehicleResponse;
 
 import java.util.List;
 import java.util.Map;
 
 public interface VehicleService {
-    List<VehicleResponse> getVehicles(Integer page, Integer size, String sortBy, Boolean ascending);
+    PageResponse<VehicleResponse> getVehicles(Integer page, Integer size, String sortBy, Boolean ascending);
     VehicleResponse getVehicleById(Long id);
     VehicleResponse saveVehicle(VehicleRequest request);
     VehicleResponse updateVehicle(Long id, VehicleRequest request);

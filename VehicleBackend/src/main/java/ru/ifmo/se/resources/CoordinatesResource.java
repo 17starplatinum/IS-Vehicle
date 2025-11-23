@@ -7,10 +7,10 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import ru.ifmo.se.dto.requests.CoordinatesRequest;
 import ru.ifmo.se.dto.responses.CoordinatesResponse;
+import ru.ifmo.se.dto.responses.PageResponse;
 import ru.ifmo.se.services.api.CoordinatesService;
 import ru.ifmo.se.websocket.VehicleWebSocket;
 
-import java.util.List;
 
 @Path("/coordinates")
 @Produces(MediaType.APPLICATION_JSON)
@@ -26,7 +26,7 @@ public class CoordinatesResource {
                                 @QueryParam("sortBy") @DefaultValue("id") String sortBy,
                                 @QueryParam("ascending") @DefaultValue("true") boolean ascending) {
 
-        List<CoordinatesResponse> coordinates = coordinatesService.getCoordinates(page, size, sortBy, ascending);
+        PageResponse<CoordinatesResponse> coordinates = coordinatesService.getCoordinates(page, size, sortBy, ascending);
         return Response.ok(coordinates, MediaType.APPLICATION_JSON).build();
     }
 

@@ -97,6 +97,13 @@ public class VehicleRepositoryImpl implements VehicleRepository {
     }
 
     @Override
+    public long countAllEntities() {
+        String jpql = "SELECT COUNT(e) FROM Vehicle e";
+        TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+        return query.getSingleResult();
+    }
+
+    @Override
     public long calculateFuelConsumptionSum() {
         try {
             log.debug("Calculating fuel consumption sum...");

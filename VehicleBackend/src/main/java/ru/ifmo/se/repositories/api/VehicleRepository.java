@@ -19,4 +19,5 @@ public interface VehicleRepository {
     List<DatabaseFunctionResult> findByFuelTypeLessThan(FuelType fuelType);
     List<DatabaseFunctionResult> findByEnginePowerRange(Double min, Double max);
     void resetDistanceTravelled(Long id);
+    long countAllEntities();
 }

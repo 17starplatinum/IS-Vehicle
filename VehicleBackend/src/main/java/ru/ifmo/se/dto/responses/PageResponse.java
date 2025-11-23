@@ -4,9 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NormalResponse<T> {
-    private T message;
+public class PageResponse<T> {
+    private List<T> items;
+    private int page;
+    private int pageSize;
+    private int total;
 }

@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import ru.ifmo.se.dto.requests.VehicleRequest;
 import ru.ifmo.se.dto.responses.DatabaseFunctionResult;
+import ru.ifmo.se.dto.responses.PageResponse;
 import ru.ifmo.se.dto.responses.VehicleResponse;
 import ru.ifmo.se.entities.FuelType;
 import ru.ifmo.se.entities.Vehicle;
@@ -32,13 +33,15 @@ public class VehicleServiceImpl implements VehicleService {
 
 
     @Override
-    public List<VehicleResponse> getVehicles(Integer page, Integer size, String sortBy, Boolean ascending) {
+    public PageResponse<VehicleResponse> getVehicles(Integer page, Integer size, String sortBy, Boolean ascending) {
         ascending = vehicleValidator.validateGetParameters(page, size, ascending);
-        if (vehicleValidator.isValidSortField(sortBy)) {
-            throw new IllegalArgumentException("Sorting field is not valid. Must be one of: id, x, y");
+        if (!vehicleValidator.isValidSortField(sortBy)) {
+            String validFieldsString = String.join(", ", vehicleValidator.getValidFields());
+            throw new IllegalArgumentException("Sorting field is not valid. Must be one of: " + validFieldsString);
         }
         List<Vehicle> vehicleList = vehicleRepository.getVehicles(page, size, sortBy, ascending);
-        return vehicleMapper.toDtoList(vehicleList);
+        long total = vehicleRepository.countAllEntities();
+        return vehicleMapper.toDtoPage(vehicleMapper.toDtoList(vehicleList), page, size, total);
     }
 
     @Override

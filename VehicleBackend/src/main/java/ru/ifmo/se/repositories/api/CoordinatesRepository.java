@@ -11,4 +11,5 @@ public interface CoordinatesRepository {
     Coordinates saveCoordinates(Coordinates coordinates);
     Coordinates updateCoordinates(Coordinates coordinates);
     void deleteCoordinatesById(long id);
+    long countAllEntities();
 }

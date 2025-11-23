@@ -4,12 +4,12 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
              version="3.2">
     <persistence-unit name="vehiclePU" transaction-type="JTA">
-        <jta-data-source>java:jboss/datasources/VehicleDS</jta-data-source>
+        <jta-data-source>java:jboss/ExampleDS</jta-data-source>
         <class>ru.ifmo.se.entities.Vehicle</class>
         <class>ru.ifmo.se.entities.Coordinates</class>
         <properties>
-            <property name="jakarta.persistence.jdbc.user" value="s372799"/>
-            <property name="jakarta.persistence.jdbc.password" value="xwVxXqHACMOxPOqS"/>
+            <property name="jakarta.persistence.jdbc.user" value="sXXXXXX"/>
+            <property name="jakarta.persistence.jdbc.password" value="****************"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://pg:5432/studs"/>
             <property name="hibernate.jdbc.time_zone" value="UTC"/>
@@ -17,7 +17,7 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.default_schema" value="s372799"/>
+            <property name="hibernate.default_schema" value="public"/>
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.JBossStandAloneJtaPlatform"/>
         </properties>
     </persistence-unit>

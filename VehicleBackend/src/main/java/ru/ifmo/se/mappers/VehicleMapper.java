@@ -7,6 +7,7 @@ import org.mapstruct.Named;
 import ru.ifmo.se.dto.requests.VehicleRequest;
 import ru.ifmo.se.dto.responses.CoordinatesResponse;
 import ru.ifmo.se.dto.responses.DatabaseFunctionResult;
+import ru.ifmo.se.dto.responses.PageResponse;
 import ru.ifmo.se.dto.responses.VehicleResponse;
 import ru.ifmo.se.entities.FuelType;
 import ru.ifmo.se.entities.Vehicle;
@@ -32,6 +33,7 @@ public interface VehicleMapper {
     Vehicle fromDto(VehicleRequest vehicleRequest);
 
     List<VehicleResponse> toDtoList(List<Vehicle> vehicleList);
+    PageResponse<VehicleResponse> toDtoPage(List<VehicleResponse> vehicleList, int page, int size, long total);
 
     @Mapping(target = "type", qualifiedByName = "vehicleTypeConverter")
     @Mapping(target = "fuelType", qualifiedByName = "fuelTypeConverter")

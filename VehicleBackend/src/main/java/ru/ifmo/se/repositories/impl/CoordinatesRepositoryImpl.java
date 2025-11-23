@@ -90,4 +90,11 @@ public class CoordinatesRepositoryImpl implements CoordinatesRepository {
         }
         em.remove(coordinates.get());
     }
+
+    @Override
+    public long countAllEntities() {
+        String jpql = "SELECT COUNT(e) FROM Coordinates e";
+        TypedQuery<Long> query = em.createQuery(jpql, Long.class);
+        return query.getSingleResult();
+    }
 }
