@@ -1,0 +1,25 @@
+<div class="notification-center" aria-live="polite" aria-atomic="true">
+  <div *ngFor="let n of list" @toastAnimation class="toast" [ngClass]="n.level">
+    <div class="toast-main">
+      <div class="toast-icon">
+        <ng-container [ngSwitch]="n.level">
+          <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+          <mat-icon *ngSwitchCase="'info'">info</mat-icon>
+          <mat-icon *ngSwitchCase="'warn'">warning</mat-icon>
+          <mat-icon *ngSwitchCase="'error'">error</mat-icon>
+        </ng-container>
+      </div>
+      <div class="toast-body">
+        <div class="toast-title" *ngIf="n.title">{{ n.title }}</div>
+        <div class="toast-message" [innerText]="n.message"></div>
+      </div>
+      <button class="toast-close" mat-icon-button (click)="dismiss(n.id)" aria-label="Close notification">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="toast-actions" *ngIf="n.actions?.length">
+      <button mat-button *ngFor="let a of n.actions" (click)="onActionClick(a, n)">{{ a.label }}</button>
+    </div>
+  </div>
+</div>

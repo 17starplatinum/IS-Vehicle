@@ -1,0 +1,19 @@
+<div class="page">
+  <div class="header">
+    <h1>Vehicles</h1>
+    <button mat-flat-button color="primary" (click)="openCreateDialog()">Create Vehicle</button>
+  </div>
+
+  <app-special-ops-panel class="mb-16"></app-special-ops-panel>
+
+  <app-vehicles-table
+    [vehicles$]="vehicles$"
+    [loading$]="loading$"
+    [page$]="page$"
+    [pageSize$]="pageSize$"
+    [total$]="total$"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (pageChange)="onPageChange($event)">
+  </app-vehicles-table>
+</div>

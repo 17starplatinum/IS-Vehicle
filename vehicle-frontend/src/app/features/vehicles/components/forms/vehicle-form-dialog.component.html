@@ -1,0 +1,128 @@
+<h1 mat-dialog-title>
+  {{ data.mode === 'create' ? 'Создать' : 'Обновить' }}
+</h1>
+
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form">
+
+    <mat-form-field appearance="outline" class="w100">
+      <mat-label>Название</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.controls['name'].hasError('required')">
+        Название обязательное
+      </mat-error>
+      <mat-error *ngIf="form.controls['name'].hasError('minlength')">
+        Название не должно быть пустым
+      </mat-error>
+    </mat-form-field>
+
+    <mat-label>Координаты</mat-label>
+
+    <mat-button-toggle-group formControlName="coordMode" appearance="legacy">
+        <mat-button-toggle value="existing">Использовать существующие</mat-button-toggle>
+        <mat-button-toggle value="new">Создать новые</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <ng-container *ngIf="form.get('coordMode')?.value === 'existing'">
+        <mat-form-field appearance="outline" class="w100">
+        <mat-label>Существующие координаты</mat-label>
+        <mat-select formControlName="coordinateId">
+            <mat-option *ngFor="let c of (coordinates$ | async)" [value]="c.id">
+            id: {{c.id}} — x:{{c.x}} y:{{c.y}}
+            </mat-option>
+        </mat-select>
+        </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngIf="form.get('coordMode')?.value === 'new'">
+        <div formGroupName="coordinates" class="coord-fields">
+        <mat-form-field appearance="outline">
+            <mat-label>X</mat-label>
+            <input matInput type="number" formControlName="x" />
+            <mat-error *ngIf="form.get('coordinates.y')?.hasError('required')">X обязателен</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Y</mat-label>
+            <input matInput type="number" formControlName="y" />
+            <mat-error *ngIf="form.get('coordinates.y')?.hasError('required')">Y обязателен</mat-error>
+        </mat-form-field>
+        </div>
+    </ng-container>
+
+    <mat-form-field appearance="outline" class="w100">
+      <mat-label>Тип транспортного средства</mat-label>
+      <mat-select formControlName="type">
+        <mat-option value="PLANE">Самолёт</mat-option>
+        <mat-option value="DRONE">БПЛА</mat-option>
+        <mat-option value="SHIP">Корабль</mat-option>
+        <mat-option value="HOVERBOARD">Ховерборд</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['type'].invalid">
+        Тип является обязательным
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w100">
+      <mat-label>Сила мотора</mat-label>
+      <input matInput type="number" formControlName="enginePower" />
+      <mat-error *ngIf="form.controls['enginePower'].hasError('min')">
+        Значение силы мотора должно быть положительным числом
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w100">
+      <mat-label>Вместимость</mat-label>
+      <input matInput type="number" formControlName="capacity" />
+      <mat-error *ngIf="form.controls['capacity'].hasError('required')">
+        Вместимость обязательная
+      </mat-error>
+      <mat-error *ngIf="form.controls['capacity'].hasError('min')">
+        Значение вместимости должно быть натуральным числом
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w100">
+      <mat-label>Проезженное расстояние</mat-label>
+      <input matInput type="number" formControlName="distanceTravelled" />
+      <mat-error *ngIf="form.controls['distanceTravelled'].hasError('required')">
+        Проезженное расстояние обязательное
+      </mat-error>
+      <mat-error *ngIf="form.controls['distanceTravelled'].hasError('min')">
+        Значение проезженного расстояния должно быть неотрицательным числом
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w100">
+      <mat-label>Потребление топлива</mat-label>
+      <input matInput type="number" formControlName="fuelConsumption" />
+      <mat-error *ngIf="form.controls['fuelConsumption'].hasError('required')">
+        Потребление топлива обязательное
+      </mat-error>
+      <mat-error *ngIf="form.controls['fuelConsumption'].hasError('min')">
+        Значение потребления топлива должно быть натуральным числом
+      </mat-error>
+    </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w100">
+      <mat-label>Тип топлива</mat-label>
+      <mat-select formControlName="fuelType">
+        <mat-option value="GASOLINE">Бензин</mat-option>
+        <mat-option value="KEROSENE">Керосин</mat-option>
+        <mat-option value="ALCOHOL">Спирт</mat-option>
+        <mat-option value="NUCLEAR">Ядерное</mat-option>
+        <mat-option value="ANTIMATTER">Антиматерия</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['fuelType'].invalid">
+        Тип топлива является обязательным
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">Отмена</button>
+  <button mat-flat-button color="primary" (click)="submit()" [disabled]="form.invalid">
+    {{ data.mode === 'create' ? 'Создать' : 'Сохранить' }}
+  </button>
+</div>

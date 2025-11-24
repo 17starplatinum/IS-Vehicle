@@ -1,0 +1,17 @@
+<ng-template #content>
+  <ng-container *ngIf="vehicle$ | async as vehicle">
+    <div class="detail-header">
+      <h2>{{ vehicle.name }} (ID: {{ vehicle.id }})</h2>
+      <div class="actions">
+        <button mat-button (click)="openEdit(vehicle)">Edit</button>
+        <button mat-button color="warn" (click)="delete(vehicle)">Delete</button>
+      </div>
+    </div>
+
+    <app-vehicle-detail [vehicle$]="vehicle$"></app-vehicle-detail>
+  </ng-container>
+</ng-template>
+
+<ng-template #notFound>
+  <p>Транспортное средство не найдено</p>
+</ng-template>

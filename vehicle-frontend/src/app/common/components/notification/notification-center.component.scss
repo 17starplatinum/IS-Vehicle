@@ -1,0 +1,36 @@
+.notification-center {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  z-index: 2000;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: block;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  padding: 8px;
+  overflow: hidden;
+  .toast-main {
+    display:flex;
+    align-items:center;
+  }
+  .toast-icon { margin-right: 8px; }
+  .toast-body { flex: 1; }
+  .toast-title { font-weight:600; margin-bottom:4px; }
+  .toast-message { white-space: pre-wrap; }
+  .toast-close { margin-left: 8px; }
+
+  &.success { border-left: 4px solid #43a047; }
+  &.info    { border-left: 4px solid #1976d2; }
+  &.warn    { border-left: 4px solid #f57c00; }
+  &.error   { border-left: 4px solid #d32f2f; background: #fff6f6; }
+  .toast-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:8px; }
+}

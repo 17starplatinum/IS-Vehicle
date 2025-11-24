@@ -1,0 +1,33 @@
+<div class="toolbar">
+  <button mat-flat-button color="primary" (click)="openCreate()">Create</button>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let c">{{ c.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="x">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>X</th>
+    <td mat-cell *matCellDef="let c">{{ c.x }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="y">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Y</th>
+    <td mat-cell *matCellDef="let c">{{ c.y }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let c">
+      <button mat-icon-button (click)="openEdit(c)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button (click)="delete(c.id)"><mat-icon>delete</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5,10,25]" showFirstLastButtons></mat-paginator>
