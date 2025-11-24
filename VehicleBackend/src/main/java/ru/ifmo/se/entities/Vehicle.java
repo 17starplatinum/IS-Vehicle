@@ -41,7 +41,7 @@ public class Vehicle {
     @Positive(message = "Значение поля 'enginePower' должно быть больше 0")
     private Double enginePower;
 
-    @NotNull(message = "Поле 'enginePower' не может быть null")
+    @NotNull(message = "Поле 'numberOfWheels' не может быть null")
     @Positive(message = "Значение поля 'numberOfWheels' должно быть больше 0")
     private Integer numberOfWheels;
 
