@@ -1,0 +1,86 @@
+@use '../../../../../styles.scss' as *;
+
+.vehicles-table-container {
+  background: $color-bg-secondary;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: $shadow-card;
+  border: 1px solid $color-border;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-text;
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+
+    button {
+      border-radius: 8px;
+      padding: 6px 14px;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  background: transparent;
+
+  th {
+    background: $color-bg-primary;
+    color: $color-accent-silver;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 1px solid $color-border-light !important;
+  }
+
+  td {
+    background: $color-bg-secondary;
+    color: $color-text;
+    border-bottom: 1px solid $color-border !important;
+    transition: background 0.2s ease;
+  }
+
+  tr:hover td {
+    background: $color-bg-hover;
+  }
+}
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+
+  button {
+    min-width: 38px;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 8px;
+  }
+}
+
+.mat-mdc-paginator {
+  background: $color-bg-secondary;
+  color: $color-text;
+  border-radius: 10px;
+  margin-top: 12px;
+
+  .mat-mdc-select-value,
+  .mat-mdc-paginator-range-label {
+    color: $color-text-muted;
+  }
+
+  .mat-mdc-icon-button {
+    color: $color-accent-silver;
+  }
+}

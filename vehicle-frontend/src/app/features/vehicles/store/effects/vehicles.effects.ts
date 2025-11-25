@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { mergeMap, concatMap, map, switchMap, catchError } from 'rxjs/operators';
+import { mergeMap, concatMap, map, switchMap, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as VehiclesActions from '../actions/vehicles.actions';
@@ -10,17 +10,21 @@ import { buildCreateVehicleRequest } from '../helper';
 
 @Injectable()
 export class VehiclesEffects {
+  private actions$ = inject(Actions);
+  private api = inject(ApiService);
+
+  constructor() {
+    console.log('VehiclesEffects ctor — actions, api:', !!this.actions$, !!this.api);
+  }
 
   loadVehicles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(VehiclesActions.loadVehicles),
       concatMap(() =>
         this.api.getVehicles().pipe(
-          map((response) => 
-            VehiclesActions.loadVehiclesSuccess({ 
-              response
-            })),
-          catchError((error) => of(VehiclesActions.loadVehiclesFailure({ error })))
+          tap(r => console.log('[VehiclesEffects] api.getVehicles response', r)),
+          map(response => VehiclesActions.loadVehiclesSuccess({ response })),
+          catchError(error => of(VehiclesActions.loadVehiclesFailure({ error })))
         )
       )
     )
@@ -98,8 +102,4 @@ export class VehiclesEffects {
       )
     )
   );
-
-  constructor(private actions$: Actions, private api: ApiService) {
-    console.log('VehiclesEffects created, actions$ =', actions$, 'api =', api);
-  }
 }

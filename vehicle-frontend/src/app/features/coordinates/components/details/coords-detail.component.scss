@@ -1,0 +1,89 @@
+@use '../../../../../styles' as *;
+
+.coords-detail {
+  display: block;
+  color: $color-white;
+  font-family: $font-alt;
+  padding: 12px;
+
+  .overview {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+
+    .meta {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+
+      .item {
+        background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));
+        border: 1px solid rgba(255,255,255,0.02);
+        padding: 10px;
+        border-radius: 8px;
+
+        .label { color: $color-silver; font-size: 0.85rem; font-weight: 600; }
+        .value { color: $color-white; font-weight: 700; font-family: $font-alt; }
+      }
+    }
+
+    .actions {
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      button {
+        @include outline-button($color-silver);
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: 600;
+        width: 100%;
+        text-align: center;
+
+        &.danger {
+          @include outline-button(#ff6b6b);
+        }
+        &.gold {
+          @include outline-button($color-gold);
+        }
+      }
+    }
+  }
+
+  .map {
+    height: 280px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(0,0,0,0.30), rgba(0,0,0,0.5));
+    border: 1px solid rgba(255,255,255,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba($color-white, 0.85);
+    margin-bottom: 12px;
+  }
+
+  .notes {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+    border: 1px solid rgba(255,255,255,0.02);
+    padding: 12px;
+    border-radius: 8px;
+    color: $color-silver;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 880px) {
+  .coords-detail {
+    .overview {
+      flex-direction: column;
+    }
+    .map {
+      height: 200px;
+    }
+  }
+}

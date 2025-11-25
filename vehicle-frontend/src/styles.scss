@@ -1,1 +1,141 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&family=Exo+2:wght@400;700&display=swap');
+
+$color-bg-dark: #121212;
+$color-black: #000000;
+$color-bg-secondary: #1a1a1a; 
+$color-white: #ffffff;
+$color-silver: #C0C0C0;
+$color-gold: #FFD700;
+$color-border: rgba(255, 255, 255, 0.15);
+$color-border-light: rgba(255, 255, 255);
+
+$font-primary: 'Orbitron', sans-serif;
+$font-secondary: 'Rajdhani', sans-serif;
+$font-alt: 'Exo 2', sans-serif;
+
+$shadow-card: 0 0 12px rgba(0, 0, 0, 0.45);
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $color-bg-dark;
+  color: $color-white;
+  font-family: $font-primary;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $color-white;
+  font-family: $font-secondary;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+a {
+  color: $color-gold;
+  text-decoration: none;
+  &:hover, &:focus {
+    color: $color-silver;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid $color-silver;
+  padding: 0.5em 1em;
+}
+th {
+  background-color: darken($color-bg-dark, 10%);
+  color: $color-white;
+}
+
+input, textarea, select {
+  background-color: $color-black;
+  color: $color-white;
+  border: 1px solid $color-silver;
+  padding: 0.5em;
+  font-family: $font-primary;
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+  background: none;
+  color: $color-white;
+  border: 2px solid $color-white;
+  padding: 0.5em 1em;
+  font-family: $font-primary;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+  &:hover, &:focus {
+    background-color: $color-silver;
+    color: $color-black;
+  }
+}
+
+.dialog, .modal {
+  background-color: $color-black;
+  color: $color-white;
+  border: 1px solid $color-silver;
+  padding: 1em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+}
+
+@mixin outline-button($outline-color) {
+  background: none;
+  border: 2px solid $outline-color;
+  color: $outline-color;
+  transition: background 0.3s ease, color 0.3s ease;
+  &:hover {
+    background-color: $outline-color;
+    color: $color-black;
+  }
+}
+
+.btn-outline-gold {
+  @include outline-button($color-gold);
+}
+
+.btn-outline-silver {
+  @include outline-button($color-silver);
+}
+
+
+@mixin carbon-fiber-bg {
+  background:
+    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+    linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
+    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
+    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
+  background-color: #131313;
+  background-size: 20px 20px;
+}
+
+@mixin card-style {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+.carbon-bg {
+  @include carbon-fiber-bg;
+}
+
+.card-style {
+  @include card-style;
+}

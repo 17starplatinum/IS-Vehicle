@@ -4,8 +4,7 @@
     <button mat-flat-button color="primary" (click)="openCreateDialog()">Create Vehicle</button>
   </div>
 
-  <app-special-ops-panel class="mb-16"></app-special-ops-panel>
-
+  <app-special-ops-panel class="mb-16 special-ops-wrapper"></app-special-ops-panel>
   <app-vehicles-table
     [vehicles$]="vehicles$"
     [loading$]="loading$"

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -24,7 +24,10 @@ import {
     styleUrls: ['./vehicles-table.component.scss']
 })
 export class VehiclesTableComponent implements OnInit {
-    constructor(private store: Store, @Inject(MAT_DIALOG_DATA)private dialog: MatDialog) {
+    constructor(
+        private store: Store, 
+        @Optional() @Inject(MAT_DIALOG_DATA)private dialog: MatDialog
+    ) {
         this.vehicles$ = this.store.select(selectVehiclesList);
         this.loading$ = this.store.select(selectVehiclesLoading);
         this.page$ = this.store.select(selectVehiclesPage);
@@ -44,7 +47,7 @@ export class VehiclesTableComponent implements OnInit {
 
     dataSource = new MatTableDataSource<Vehicle>();
     
-    columns = ['id', 'name', 'coordinates.id', 'creationDate', 'type', 
+    columns = ['id', 'name', 'coordinates', 'creationDate', 'type', 
         'enginePower', 'numberOfWheels', 'capacity', 'distanceTravelled', 
         'fuelConsumption', 'fuelType'];
     page = 1;

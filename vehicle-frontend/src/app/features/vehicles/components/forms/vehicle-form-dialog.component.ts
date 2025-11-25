@@ -1,7 +1,7 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Subject, Observable, firstValueFrom } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Actions, ofType } from '@ngrx/effects';
@@ -26,10 +26,9 @@ export class VehicleFormDialogComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private store: Store,
     private actions$: Actions,
-    public dialogRef: MatDialogRef<VehicleFormDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Optional() public dialogRef: MatDialogRef<VehicleFormDialogComponent> | null,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any | null
   ) {
-    // safe: store уже инжектирован
     this.coordinates$ = this.store.select(selectCoordinatesList);
   }
 
@@ -154,15 +153,13 @@ export class VehicleFormDialogComponent implements OnInit, OnDestroy {
         const payload = this.buildVehiclePayload(v, created.id);
         this.dispatchVehicleAction(payload);
       } else {
-        // handle failure
       }
     } catch (err) {
-      // handle error
     }
   }
 
   private dispatchVehicleAction(payload: CreateVehicleRequest) {
     this.store.dispatch(VehiclesActions.createVehicle({ vehicle: payload }));
-    this.dialogRef.close();
+    this.dialogRef?.close();
   }
 }

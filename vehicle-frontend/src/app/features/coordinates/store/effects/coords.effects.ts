@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, concatMap, map, switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -8,6 +8,11 @@ import { ApiService } from '../../../../core/services/api.service';
 
 @Injectable()
 export class CoordinatesEffects {
+  
+  private actions$ = inject(Actions);
+  private api = inject(ApiService);
+  
+  constructor() {}
 
   loadCoordinatesList$ = createEffect(() =>
     this.actions$.pipe(
@@ -71,6 +76,5 @@ export class CoordinatesEffects {
       )
     )
   );
-  
-  constructor(private actions$: Actions, private api: ApiService) {}
+
 }

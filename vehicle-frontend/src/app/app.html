@@ -1,12 +1,11 @@
 <div class="app-shell">
-  <header>
+  <header class="app-header">
     <h1>{{ title() }}</h1>
     <nav>
-      <a routerLink="/vehicles">Vehicles</a>
-      <a routerLink="/coordinates">Coordinates</a>
+      <a mat-button routerLink="/vehicles" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Транспорты</a>
+      <a mat-button routerLink="/coordinates" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Координаты</a>
     </nav>
   </header>
-  <p>Test</p>
   <section class="content">
     <router-outlet></router-outlet>
   </section>

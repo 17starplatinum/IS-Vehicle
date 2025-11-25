@@ -1,25 +1,22 @@
-import { Routes } from '@angular/router';
-import { provideState } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';
-import { vehiclesFeature } from './store/reducers/vehicles.reducer';
-import { VehiclesEffects } from './store/effects/vehicles.effects';
+import { RouterModule, Routes } from '@angular/router';
 import { VehiclesPageComponent } from './pages/vehicles-page/vehicles-page.component';
-import { specialOpsFeature } from './store/reducers/special-ops.reducer';
-import { SpecialOpsEffects } from './store/effects/special-ops.effects';
 import { VehicleDetailPageComponent } from './pages/vehicles-detail-page/vehicles-detail-page.component';
-
+import { NgModule } from '@angular/core';
 
 export const vehiclesRoutes: Routes = [
   {
     path: '',
     component: VehiclesPageComponent,
-    providers: [
-      provideState(vehiclesFeature),
-      provideState(specialOpsFeature),
-      provideEffects([VehiclesEffects, SpecialOpsEffects])
-    ],
+    providers: [],
     children: [
       { path: ':id', component: VehicleDetailPageComponent }
     ]
   }
 ];
+
+@NgModule({
+  imports: [RouterModule.forChild(vehiclesRoutes)],
+  exports: [RouterModule]
+})
+export class VehiclesRoutingModule {}
+

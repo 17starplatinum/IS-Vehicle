@@ -1,3 +1,27 @@
+@use '../../../../../styles.scss' as *;
+
+:host {
+  display: block;
+}
+
+.dialog-container {
+  background: $color-bg-secondary;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 0 22px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  min-width: 380px;
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: $color-accent-silver;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.18);
+  }
+}
+
 .w100 {
   width: 100%;
 }
@@ -5,5 +29,68 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+  --mdc-theme-primary: $color-accent-gold;
+  --mdc-theme-on-primary: black;
+
+  .mdc-text-field {
+    background: $color-bg-tertiary;
+    border-radius: 8px !important;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .mdc-floating-label {
+    color: $color-text-muted !important;
+  }
+
+  .mdc-text-field__input {
+    color: $color-text-primary;
+  }
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+
+  button {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+
+    &.save {
+      background: linear-gradient(135deg, $color-accent-silver, $color-accent-gold);
+      color: black;
+      border: none;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
+
+      &:hover {
+        box-shadow: 0 0 18px rgba(255, 215, 0, 0.55);
+        transform: translateY(-1px);
+      }
+    }
+
+    &.cancel {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: $color-accent-silver;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+    }
+  }
 }

@@ -1,0 +1,149 @@
+@use '../../../../../styles' as *;
+
+.coords-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px 0;
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    .title {
+      font-family: $font-secondary;
+      font-size: 1.25rem;
+      color: $color-white;
+      letter-spacing: 0.6px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      .search {
+        min-width: 220px;
+        max-width: 420px;
+        .mat-form-field-infix {
+          background: rgba(255,255,255,0.02);
+        }
+      }
+
+      .btn-create {
+        @include outline-button($color-gold);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .coords-card {
+    @include card-style;
+    @include carbon-fiber-bg;
+    @extend .card !optional;
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid rgba($color-white, 0.04);
+
+    .table-wrapper {
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.08));
+      border-radius: 8px;
+      padding: 8px;
+      overflow: auto;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: $font-alt;
+
+        thead th {
+          position: sticky;
+          top: 0;
+          background: rgba(0,0,0,0.45);
+          color: $color-white;
+          font-weight: 700;
+          padding: 10px 12px;
+        }
+
+        tbody td {
+          padding: 10px 12px;
+          color: $color-silver;
+          border-bottom: 1px dashed rgba(255,255,255,0.03);
+        }
+
+        tr:hover td {
+          background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+          color: $color-white;
+        }
+
+        .actions-cell {
+          display: flex;
+          gap: 8px;
+
+          button {
+            @include outline-button($color-silver);
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+
+    .paginator {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+
+      .mat-paginator-range-label {
+        color: $color-silver;
+      }
+    }
+  }
+
+  .empty {
+    @extend .card !optional;
+    text-align: center;
+    padding: 24px;
+    color: rgba($color-white, 0.8);
+    .hint {
+      color: $color-silver;
+      margin-top: 8px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .coords-page {
+    .page-header {
+      flex-direction: column;
+      align-items: stretch;
+      .controls {
+        justify-content: space-between;
+        .search { width: 100%; max-width: none; }
+      }
+    }
+
+    .coords-card {
+      .table-wrapper {
+        table {
+          font-size: 0.95rem;
+          thead th { font-size: 0.9rem; }
+          tbody td { padding: 8px 10px; }
+        }
+      }
+    }
+  }
+}
+
+.kv-compact {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  .k { color: $color-silver; font-size: 0.9rem; }
+  .v { color: $color-white; font-weight: 600; }
+}

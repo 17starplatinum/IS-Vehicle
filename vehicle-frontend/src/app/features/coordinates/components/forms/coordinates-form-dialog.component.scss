@@ -1,9 +1,123 @@
+@use '../../../../../styles' as *;
+
 .w100 {
   width: 100%;
 }
 
-.form {
+.coords-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding: 12px;
+  font-family: $font-primary;
+
+  .form-card {
+    @include carbon-fiber-bg;
+    background-clip: padding-box;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid rgba($color-white, 0.04);
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+
+    &.single-column {
+      grid-template-columns: 1fr;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      label {
+        font-size: 0.85rem;
+        color: $color-silver;
+        font-weight: 600;
+      }
+
+      .mat-form-field {
+        width: 100%;
+        .mat-form-field-infix {
+          background: rgba(255,255,255,0.02);
+          color: $color-white;
+        }
+      }
+
+      input, textarea, select {
+        background: transparent;
+        color: $color-white;
+        border: 1px solid rgba($color-white, 0.06);
+        padding: 8px;
+        border-radius: 6px;
+        font-family: $font-primary;
+        font-size: 0.95rem;
+      }
+
+      .mat-error, .error-text {
+        color: #ff8b8b;
+        font-size: 0.85rem;
+        margin-top: 4px;
+      }
+    }
+
+    .actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-top: 8px;
+
+      button {
+        min-width: 96px;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-weight: 700;
+        text-transform: none;
+      }
+
+      .btn-cancel {
+        @include outline-button($color-silver);
+        background: transparent;
+        color: $color-silver;
+      }
+
+      .btn-submit {
+        @include outline-button($color-gold);
+        background: $color-gold;
+        color: $color-black;
+        &:hover { filter: brightness(0.95); }
+      }
+
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.06);
+        color: $color-silver;
+        &:hover { color: $color-white; background: rgba(255,255,255,0.02); }
+      }
+    }
+  }
+
+  .hint {
+    font-size: 0.9rem;
+    color: rgba($color-white, 0.75);
+  }
+}
+
+@media (max-width: 720px) {
+  .coords-form {
+    form { grid-template-columns: 1fr; }
+
+    .actions { justify-content: stretch; flex-direction: column;
+      button { width: 100%; }
+    }
+  }
 }

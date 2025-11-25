@@ -8,6 +8,7 @@ import { VehicleFormDialogComponent } from './components/forms/vehicle-form-dial
 import { SpecialOpsPanelComponent } from './components/special-ops-panel/special-ops-panel.component';
 import { VehicleDetailComponent } from './components/details/vehicle-detail.component';
 import { RouterModule } from '@angular/router';
+import { VehiclesRoutingModule } from './vehicles-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     SharedMaterialModule,
-    RouterModule
+    RouterModule,
+    VehiclesRoutingModule
   ],
   providers: []
 })

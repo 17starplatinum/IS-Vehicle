@@ -1,8 +1,9 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
 import { vehiclesFeature } from './features/vehicles/store/reducers/vehicles.reducer';
 import { coordsFeature } from './features/coordinates/store/reducers/coords.reducer';
 import { specialOpsFeature } from './features/vehicles/store/reducers/special-ops.reducer';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
   {
@@ -23,3 +24,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
   { path: '**', redirectTo: '' }
 ];
+
+@NgModule({ 
+  imports: [RouterModule.forChild(routes)], 
+  exports: [RouterModule] })
+export class AppRoutingModule {}

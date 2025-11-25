@@ -121,7 +121,7 @@
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="dialogRef.close()">Отмена</button>
+  <button mat-button (click)="dialogRef?.close()">Отмена</button>
   <button mat-flat-button color="primary" (click)="submit()" [disabled]="form.invalid">
     {{ data.mode === 'create' ? 'Создать' : 'Сохранить' }}
   </button>

@@ -11,8 +11,8 @@
     </ng-container>
 
     <ng-container matColumnDef="coordinates">
-      <th mat-header-cell *matHeaderCellDef (click)="sortFunction('coordinates.id')">ID координаты</th>
-      <td mat-cell *matCellDef="let vehicle">{{ vehicle.coordinates.id }}</td>
+      <th mat-header-cell *matHeaderCellDef (click)="sortFunction('coordinates')">ID координаты</th>
+      <td mat-cell *matCellDef="let vehicle">{{ vehicle.coordinates }}</td>
 	  <td mat-cell *matCellDef="let v">
   		<a [routerLink]="['/coordinates', v.id]">{{ v.id }}</a>
 	  </td>

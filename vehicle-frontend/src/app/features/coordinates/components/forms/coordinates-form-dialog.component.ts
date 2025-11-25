@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Inject, Optional } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import * as CoordsActions from '../../store/actions/coords.actions'
 import { selectCoordinatesList } from '../../store/selectors/coords.selector';
 import { Coordinates } from '../../store/models/coords.models';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-coords-form-dialog',
@@ -25,10 +25,14 @@ export class CoordsFormDialogComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any | null,
+    @Optional() public dialogRef: MatDialogRef<CoordsFormDialogComponent> | null
+  ) {
     this.loading$ = this.store.select(selectCoordinatesList)
   }
-
   ngOnInit() {
     this.store.select(selectCoordinatesList).pipe(takeUntil(this.destroy$)).subscribe(list => {
       this.dataSource.data = list || [];

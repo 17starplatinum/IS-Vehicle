@@ -2,7 +2,7 @@
 <div *ngIf="(error$ | async) as err" class="error">Ошибка: {{ err?.message || err }}</div>
 
 <ng-container *ngIf="coordinates$ | async as coordinates;">
-  <h2>Координаты #{{coordinates.id}}</h2>
+  <h2>Координаты #{{coordinates}}</h2>
 
   <div class="actions">
     <button mat-flat-button color="primary" (click)="openEdit(coordinates)">Редактировать</button>

@@ -35,6 +35,7 @@ export class CoordinatesPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.facade.load(0, 10, 'id', true);
   }
+
   openCreateDialog() {
     const ref = this.dialog.open(CoordsFormDialogComponent, {
       width: '720px',
@@ -44,6 +45,7 @@ export class CoordinatesPageComponent implements OnInit, OnDestroy {
     ref.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(result => {
     });
   }
+  
   add() {
     this.dialog.open(CoordsFormDialogComponent, {
       width: '500px',
