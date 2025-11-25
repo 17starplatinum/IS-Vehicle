@@ -105,7 +105,7 @@ BEGIN
             v.engine_power IS NOT NULL AND
             v.engine_power >= range_min AND
             v.engine_power <= range_max
-        ORDER BY v.engine_power ASC, v.name ASC;
+        ORDER BY v.engine_power, v.name;
 END;
 $$ LANGUAGE plpgsql;
 
