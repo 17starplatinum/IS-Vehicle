@@ -15,7 +15,8 @@ import ru.ifmo.se.entities.Coordinates;
 import ru.ifmo.se.exceptions.NotFoundException;
 import ru.ifmo.se.repositories.api.CoordinatesRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class CoordinatesRepositoryImpl implements CoordinatesRepository {
@@ -40,7 +41,7 @@ public class CoordinatesRepositoryImpl implements CoordinatesRepository {
 
         TypedQuery<Coordinates> query = em.createQuery(cq);
 
-        query.setFirstResult(page * size);
+        query.setFirstResult((page - 1) * size);
         query.setMaxResults(size);
 
         log.debug("Returning coordinates: {}", query.getResultList());

@@ -1,5 +1,10 @@
 package ru.ifmo.se.dto.responses;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,14 +18,26 @@ import java.util.Date;
 @NoArgsConstructor
 public class VehicleResponse {
     private long id;
+    @NotBlank
     private String name;
+    @NotNull
+    @PastOrPresent
     private Date creationDate;
-    private CoordinatesResponse coordinatesResponse;
+    @Valid
+    @NotNull
+    private CoordinatesResponse coordinates;
+    @NotNull
     private VehicleType type;
-    private double enginePower;
+    @Positive
+    private Double enginePower;
+    @Positive
     private int numberOfWheels;
+    @Positive
     private int capacity;
+    @Positive
     private double distanceTravelled;
+    @Positive
     private long fuelConsumption;
+    @NotNull
     private FuelType fuelType;
 }

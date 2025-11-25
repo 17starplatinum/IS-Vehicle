@@ -4,7 +4,7 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
              version="3.2">
     <persistence-unit name="vehiclePU" transaction-type="JTA">
-        <jta-data-source>java:jboss/ExampleDS</jta-data-source>
+        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
         <class>ru.ifmo.se.entities.Vehicle</class>
         <class>ru.ifmo.se.entities.Coordinates</class>
         <properties>

@@ -1,13 +1,13 @@
 package ru.ifmo.se.repositories.impl;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.transaction.Transactional;
 import ru.ifmo.se.dto.responses.DatabaseFunctionResult;
 import ru.ifmo.se.entities.FuelType;
 import ru.ifmo.se.entities.Vehicle;
@@ -41,7 +41,7 @@ public class VehicleRepositoryImpl implements VehicleRepository {
 
         TypedQuery<Vehicle> query = em.createQuery(cq);
 
-        query.setFirstResult(page * size).setMaxResults(size);
+        query.setFirstResult((page - 1) * size).setMaxResults(size);
         query.setMaxResults(size);
         log.debug("Returning vehicles: {}", query.getResultList());
 

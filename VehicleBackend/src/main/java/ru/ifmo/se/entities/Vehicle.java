@@ -1,10 +1,7 @@
 package ru.ifmo.se.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.Instant;
@@ -30,6 +27,7 @@ public class Vehicle {
     private Coordinates coordinates;
 
     @Builder.Default
+    @PastOrPresent
     @NotNull(message = "Поле даты создания не может быть null")
     @Column(updatable = false, nullable = false)
     private java.util.Date creationDate = Date.from(Instant.now());

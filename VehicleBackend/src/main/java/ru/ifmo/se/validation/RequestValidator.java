@@ -5,4 +5,5 @@ public interface RequestValidator<T> {
     boolean validateGetParameters(Integer page, Integer size, Boolean ascending);
     boolean isValidSortField(String field);
     void validateRequest(T request);
+    void validateRange(Double min, Double max);
 }
