@@ -1,0 +1,68 @@
+$color-black: #000000 !default;
+$color-white: #ffffff !default;
+
+$color-bg-primary:  #0d0d0d !default;
+$color-bg-secondary:#1a1a1a !default;
+$color-bg-tertiary: #121212 !default;
+$color-bg-hover:    #222222 !default;
+
+$color-border:       rgba(255,255,255,0.08) !default;
+$color-border-weak:  rgba(255,255,255,0.04) !default;
+$color-border-strong: rgba(255,255,255,0.12) !default;
+
+$color-text:       #e6e6e6 !default;
+$color-text-muted: #b5b5b5 !default;
+
+$color-silver: #c0c0c0 !default;
+$color-gold:   #d4af37 !default;
+$color-danger: #ff6b6b !default;
+$color-success:#4caf50 !default;
+
+$color-accent-primary: $color-gold !default;
+$color-accent-secondary: $color-silver !default;
+
+$font-primary:  "Inter", "Roboto", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif !default;
+$font-secondary:"Space Grotesk", "Montserrat", $font-primary !default;
+$font-mono:     "Roboto Mono", "Courier New", monospace !default;
+
+$fs-xs: 12px !default;
+$fs-sm: 14px !default;
+$fs-base: 16px !default;
+$fs-lg: 18px !default;
+$fs-xl: 20px !default;
+
+$space-xxs: 4px  !default;
+$space-xs:  8px  !default;
+$space-sm:  12px !default;
+$space-md:  16px !default;
+$space-lg:  24px !default;
+$space-xl:  32px !default;
+
+$max-content-width: 1280px !default;
+
+$radius-sm: 6px  !default;
+$radius-md: 10px !default;
+$radius-lg: 14px !default;
+
+$shadow-xs:  0 2px 6px rgba(0,0,0,0.45) !default;
+$shadow-sm:  0 6px 18px rgba(0,0,0,0.55) !default;
+$shadow-card: 0 10px 28px rgba(0,0,0,0.6) !default;
+
+$z-modal: 1400 !default;
+$z-overlay: 1200 !default;
+$z-header: 1000 !default;
+$z-dropdown: 900 !default;
+
+$bp-xs:  480px !default;
+$bp-sm:  720px !default;
+$bp-md:  960px !default;
+$bp-lg: 1280px !default;
+
+$mat-primary: $color-accent-primary !default;
+$mat-accent: $color-accent-secondary !default;
+$mat-warn: $color-danger !default;
+
+$form-control-height: 40px !default;
+$input-border-radius: $radius-sm !default;
+
+$enable-carbon-texture: true !default;

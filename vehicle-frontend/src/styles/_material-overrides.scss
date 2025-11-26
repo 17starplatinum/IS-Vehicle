@@ -1,0 +1,136 @@
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button {
+  font-family: inherit;
+  text-transform: none;
+  border-radius: 6px;
+
+  .mdc-button__label {
+    font-weight: 500;
+  }
+}
+
+.mat-mdc-raised-button {
+  background-color: $color-primary;
+  color: $color-bg-primary;
+
+  &:hover {
+    background-color: $color-primary-hover;
+  }
+
+  &:disabled {
+    background-color: $color-disabled-bg;
+    color: $color-disabled-text;
+  }
+}
+
+.mat-mdc-outlined-button {
+  border-color: $color-border;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+}
+
+.mdc-text-field {
+  background: $color-bg-primary;
+  border-radius: 6px;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  padding-inline: 0;
+}
+
+.mat-mdc-table {
+  background: $color-bg-primary;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+}
+
+.mat-mdc-header-row {
+  background: $color-bg-secondary;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 600;
+  border-bottom: 1px solid $color-border;
+}
+
+.mat-mdc-row {
+  border-bottom: 1px solid $color-border;
+
+  &:hover {
+    background: $color-hover;
+  }
+}
+
+.mat-mdc-dialog-surface {
+  background: $color-bg-primary;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.mat-mdc-tab-header {
+  border-bottom: 1px solid $color-border;
+}
+
+.mat-mdc-tab-labels .mdc-tab {
+  text-transform: none;
+  font-weight: 500;
+}
+
+.mat-mdc-tab--active {
+  color: $color-primary;
+}
+
+.mat-mdc-card {
+  background: $color-bg-primary;
+  border: 1px solid $color-border;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.mat-mdc-card-header-text {
+  font-weight: 600;
+}
+
+.mat-mdc-select {
+  .mat-mdc-select-trigger {
+    border-radius: 6px;
+    border: 1px solid $color-border;
+    padding: 6px 8px;
+
+    &:hover {
+      border-color: $color-primary;
+    }
+  }
+}
+
+.mat-mdc-select-panel {
+  background: $color-bg-primary;
+  border: 1px solid $color-border;
+}
+
+.mat-mdc-checkbox {
+  .mdc-checkbox__background {
+    border-color: $color-border;
+  }
+
+  &.mdc-checkbox--checked .mdc-checkbox__background {
+    background-color: $color-primary;
+    border-color: $color-primary;
+  }
+}
+
+.mat-mdc-snack-bar-container {
+  background: $color-bg-secondary;
+  color: $color-text-primary;
+  border: 1px solid $color-border;
+  border-radius: 6px;
+}
+

@@ -17,7 +17,7 @@
     margin-bottom: 18px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    color: $color-accent-silver;
+    color: $color-silver;
     text-shadow: 0 0 6px rgba(255, 255, 255, 0.18);
   }
 }
@@ -34,11 +34,11 @@
 
 .mat-mdc-form-field {
   width: 100%;
-  --mdc-theme-primary: $color-accent-gold;
+  --mdc-theme-primary: $color-gold;
   --mdc-theme-on-primary: black;
 
   .mdc-text-field {
-    background: $color-bg-tertiary;
+    background: $color-bg-secondary;
     border-radius: 8px !important;
     border: 1px solid rgba(255, 255, 255, 0.06);
 
@@ -71,7 +71,7 @@
     backdrop-filter: blur(4px);
 
     &.save {
-      background: linear-gradient(135deg, $color-accent-silver, $color-accent-gold);
+      background: linear-gradient(135deg, $color-silver, $color-gold);
       color: black;
       border: none;
       box-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
@@ -85,7 +85,7 @@
     &.cancel {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      color: $color-accent-silver;
+      color: $color-silver;
 
       &:hover {
         background: rgba(255, 255, 255, 0.08);

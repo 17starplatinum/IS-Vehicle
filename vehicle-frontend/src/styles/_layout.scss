@@ -1,0 +1,95 @@
+@use 'styles/variables' as vars;
+@use 'styles/mixins' as mix;
+
+.page-container {
+  width: 100%;
+  max-width: vars.$container-max-width;
+  margin: 0 auto;
+  padding: vars.$space-xl vars.$space-lg;
+
+  @include mix.mobile {
+    padding: vars.$space-lg vars.$space-md;
+  }
+}
+
+.page-column {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-xl;
+}
+
+.row-2,
+.row-3 {
+  display: grid;
+  gap: vars.$space-lg;
+}
+
+.row-2 {
+  grid-template-columns: repeat(2, 1fr);
+
+  @include mix.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.row-3 {
+  grid-template-columns: repeat(3, 1fr);
+
+  @include mix.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mix.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-wrapper {
+  @include mix.card;
+  padding: vars.$space-lg;
+  overflow-x: auto;
+
+  background: vars.$color-bg-secondary;
+}
+
+.top-nav {
+  @include mix.flex-between;
+  padding: vars.$space-md vars.$space-lg;
+  background: vars.$color-bg-secondary;
+  border-bottom: 1px solid vars.$color-border;
+
+  a {
+    color: vars.$color-text;
+    font-weight: 500;
+    padding: vars.$space-sm vars.$space-md;
+    border-radius: vars.$radius-sm;
+    text-decoration: none;
+
+    @include mix.transition(color, background);
+
+    &:hover {
+      background: vars.$color-bg-hover;
+      color: vars.$color-accent-primary;
+    }
+  }
+}
+
+.form-section {
+  @include mix.card;
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-lg;
+}
+
+.page-title {
+  font-size: vars.$fs-xl;
+  font-weight: 600;
+
+  @include mix.accent-underline(vars.$color-accent-primary);
+}
