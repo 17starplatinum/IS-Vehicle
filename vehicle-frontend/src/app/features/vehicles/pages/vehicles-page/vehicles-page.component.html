@@ -1,10 +1,63 @@
-<div class="page">
+<div class="page-container">
   <div class="header">
-    <h1>Vehicles</h1>
-    <button mat-flat-button color="primary" (click)="openCreateDialog()">Create Vehicle</button>
+    <h1>Транспорты</h1>
+    <button mat-flat-button color="primary" (click)="openCreateDialog()">Создать транспорт</button>
   </div>
 
   <app-special-ops-panel class="mb-16 special-ops-wrapper"></app-special-ops-panel>
+  <div class="table-controls" role="region" aria-label="Table controls">
+  <div class="controls-left">
+    <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Тип топлива</mat-label>
+        <mat-select [(ngModel)]="threshold">
+          <mat-option value="GASOLINE">Бензин</mat-option>
+          <mat-option value="KEROSENE">Керосин</mat-option>
+          <mat-option value="ALCOHOL">Спирт</mat-option>
+          <mat-option value="NUCLEAR">Ядерное</mat-option>
+          <mat-option value="ANTIMATTER">Антиматерия</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+
+  <div class="filters-inline" aria-label="Filters">
+    <div class="filter-pill">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Тип топлива</mat-label>
+        <mat-select [(ngModel)]="threshold">
+          <mat-option value="GASOLINE">Бензин</mat-option>
+          <mat-option value="KEROSENE">Керосин</mat-option>
+          <mat-option value="ALCOHOL">Спирт</mat-option>
+          <mat-option value="NUCLEAR">Ядерное</mat-option>
+          <mat-option value="ANTIMATTER">Антиматерия</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field small">
+        <mat-label>Предел</mat-label>
+        <input matInput type="number" [(ngModel)]="threshold" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary"
+              (click)="runFilterByFuelType()">
+        Применить
+      </button>
+    </div>
+    
+    <div class="filter-pill">
+      <mat-form-field appearance="outline" class="filter-field small">
+        <mat-label>min</mat-label>
+        <input matInput type="number" [(ngModel)]="minPower" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="filter-field small">
+        <mat-label>max</mat-label>
+        <input matInput type="number" [(ngModel)]="maxPower" />
+      </mat-form-field>
+      <button mat-flat-button color="primary"
+              (click)="runFindByPowerRange()">
+        Применить
+      </button>
+    </div>
+  </div>
   <app-vehicles-table
     [vehicles$]="vehicles$"
     [loading$]="loading$"

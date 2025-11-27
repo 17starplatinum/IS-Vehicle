@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Vehicle } from '../../../../core/models/vehicle.model';
 import { CreateVehicleRequest, PageResponse } from '../models/vehicles.models';
   
-export const loadVehicles = createAction('[Vehicles] Load', props<{page:number,pageSize:number,sortBy:string,ascending:boolean}>());
+export const loadVehicles = createAction('[Vehicles] Load', props<{page:number,pageSize:number,sortBy:string,ascending:boolean,fuelType:string|null,min:number|null,max:number|null,filter:string|null}>());
 export const loadVehiclesSuccess = createAction('[Vehicles] Load Success', props<{response: PageResponse<Vehicle>}>());
 export const loadVehiclesFailure = createAction('[Vehicles] Load Failure', props<{error:any}>());
 

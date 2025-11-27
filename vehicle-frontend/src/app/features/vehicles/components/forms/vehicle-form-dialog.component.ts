@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject, Observable, firstValueFrom } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Actions, ofType } from '@ngrx/effects';
@@ -19,7 +19,7 @@ import { CreateVehicleRequest, CreateCoordinatesRequest } from '../../store/mode
 })
 export class VehicleFormDialogComponent implements OnInit, OnDestroy {
   form!: FormGroup;
-  coordinates$!: Observable<any[]>; // типизируй по своему Coordinates[]
+  coordinates$!: Observable<any[]>;
   private destroy$ = new Subject<void>();
 
   constructor(

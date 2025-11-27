@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .mat-mdc-button,
 .mat-mdc-raised-button,
 .mat-mdc-outlined-button,
@@ -11,8 +13,17 @@
   }
 }
 
+.mat-mdc-button-base.mat-primary {
+  background-color: $color-gold !important;
+  color: white !important;
+}
+
+.mat-mdc-button-base.mat-primary:hover {
+  background-color: $color-silver;
+}
+
 .mat-mdc-raised-button {
-  background-color: $color-primary;
+  background-color: $color-gold;
   color: $color-bg-primary;
 
   &:hover {
@@ -29,7 +40,7 @@
   border-color: $color-border;
 
   &:hover {
-    border-color: $color-primary;
+    border-color: $color-accent-primary;
   }
 }
 
@@ -38,8 +49,21 @@
   border-radius: 6px;
 }
 
+.mat-mdc-text-field-wrapper {
+  padding: 0.45rem 0.75rem !important;
+}
+
+.mat-mdc-form-field-infix {
+  padding: 0 !important;
+}
+
 .mat-mdc-form-field {
   width: 100%;
+  &.mdc-text-field--focused .mdc-notched-outline__leading,
+  &.mdc-text-field--focused .mdc-notched-outline__trailing {
+    border-color: #1976d2 !important; /* default primary */
+    border-width: 3px !important;
+  }
 }
 
 .mat-mdc-form-field-subscript-wrapper {
@@ -65,8 +89,20 @@
   border-bottom: 1px solid $color-border;
 
   &:hover {
-    background: $color-hover;
+    background: $color-bg-hover;
   }
+}
+
+.mdc-dialog__surface, 
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #1a1a1a !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18) !important;
+}
+
+.mat-mdc-dialog-content {
+  padding: 2rem !important;
 }
 
 .mat-mdc-dialog-surface {
@@ -85,7 +121,7 @@
 }
 
 .mat-mdc-tab--active {
-  color: $color-primary;
+  color: $color-accent-primary;
 }
 
 .mat-mdc-card {
@@ -106,14 +142,20 @@
     padding: 6px 8px;
 
     &:hover {
-      border-color: $color-primary;
+      border-color: $color-accent-primary;
     }
   }
 }
 
-.mat-mdc-select-panel {
-  background: $color-bg-primary;
+.mat-mdc-select-panel,
+.mat-mdc-option  {
+  background: $color-bg-primary !important;;
   border: 1px solid $color-border;
+}
+
+.mat-mdc-option.mdc-list-item--selected {
+  background: #e3f2fd !important; /* лёгкий голубой */
+  color: black;
 }
 
 .mat-mdc-checkbox {
@@ -122,8 +164,8 @@
   }
 
   &.mdc-checkbox--checked .mdc-checkbox__background {
-    background-color: $color-primary;
-    border-color: $color-primary;
+    background-color: $color-accent-primary;
+    border-color: $color-accent-primary;
   }
 }
 

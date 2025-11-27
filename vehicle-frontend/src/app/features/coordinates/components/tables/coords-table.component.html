@@ -2,10 +2,7 @@
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef (click)="sortFunction('id')">ID</th>
-      <td mat-cell *matCellDef="let coords">{{ coords.id }}</td>
-      <td mat-cell *matCellDef="let v">
-  		<a [routerLink]="['/vehicles', v.id]">{{ v.id }}</a>
-	  </td>
+      <td mat-cell *matCellDef="let coordinates">{{ coordinates.id }}</td>
     </ng-container>
 
     <ng-container matColumnDef="x">

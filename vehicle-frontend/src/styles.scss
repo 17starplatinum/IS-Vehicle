@@ -1,4 +1,5 @@
-@import 'styles/index';
+@use 'sass:color';
+@use 'styles/index' as *;
 
 html, body {
   height: 100%;
@@ -12,12 +13,12 @@ html, body {
 }
 
 a {
-  color: $color-accent;
+  color: $color-accent-primary;
   text-decoration: none;
   cursor: pointer;
 
   &:hover {
-    color: lighten($color-accent, 5%);
+    color: color.adjust($color-accent-secondary, $lightness: 5%);
   }
 }
 
@@ -41,7 +42,7 @@ a {
   border-radius: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: darken($color-bg-primary, 3%);
+  background: color.adjust($color-bg-primary, $lightness: -3%);
 }
 
 .app-container {
@@ -49,14 +50,6 @@ a {
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.card {
-  background: $color-bg-secondary;
-  border: 1px solid $color-border;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .actions {

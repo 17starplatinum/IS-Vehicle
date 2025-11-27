@@ -1,101 +1,109 @@
-@use '../../../../../styles.scss' as *;
-
+@use '../../../../../styles/variables' as vars;
+@use '../../../../../styles/mixins' as mixins;
 
 .special-ops-panel {
-  @extend .card;
+  background: vars.$color-bg-elevated;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-lg;
+  padding: vars.$space-xl vars.$space-lg;
+
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  gap: 12px;
+  gap: vars.$space-xl;
+
+  @include mixins.shadow-md;
+
+  h3 {
+    margin: 0;
+    color: vars.$color-text-primary;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding-bottom: vars.$space-md;
+    border-bottom: 1px solid vars.$color-border;
+  }
 
   .op-row {
     display: flex;
-    gap: 8px;
     align-items: center;
+    gap: vars.$space-lg;
+
+    .small {
+      width: 180px;
+      min-width: 160px;
+
+      mat-form-field {
+        width: 100%;
+      }
+    }
+
+    button[mat-flat-button] {
+      @include mixins.btn-primary;
+      padding: 0.6rem 1.3rem;
+      border-radius: vars.$radius-md;
+    }
+
+    button[color='warn'] {
+      @include mixins.btn-warn;
+    }
   }
 
   .status {
-    margin-top: 6px;
-  }
-
-  .result {
-    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
-    border: 1px solid rgba(255,255,255,0.03);
-    padding: 12px;
-    border-radius: 8px;
-  }
-
-  .error {
-    background: rgba(255, 0, 0, 0.06);
-    border: 1px solid rgba(255, 0, 0, 0.12);
-    color: #ffdddd;
-  }
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 8px;
-  border-bottom: 1px solid $color-border-light;
-
-  h2 {
-    font-size: 20px;
-    font-weight: 600;
-    color: $color-white;
-    margin: 0;
-  }
-}
-
-.ops-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.op-item {
-  background: $color-bg;
-  border: 1px solid $color-border;
-  border-radius: 10px;
-  padding: 14px 16px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  transition: background 0.2s ease, border-color 0.2s ease;
-
-  &:hover {
-    background: $color-bg-hover;
-    border-color: $color-accent-silver;
-  }
-
-  .info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: vars.$space-md;
 
-    .title {
-      font-size: 16px;
-      font-weight: 500;
-      color: $color-text;
-    }
+    mat-card {
+      background: vars.$color-bg-secondary;
+      border: 1px solid vars.$color-border;
+      border-radius: vars.$radius-md;
+      padding: vars.$space-lg;
 
-    .desc {
-      font-size: 14px;
-      color: $color-text-muted;
+      @include mixins.shadow-md;
+
+      &.error {
+        border-color: vars.$color-gold;
+        color: vars.$color-danger;
+      }
+
+      &.result {
+        color: vars.$color-text-primary;
+
+        h4 {
+          margin-top: 0;
+          font-size: 1.2rem;
+          color: vars.$color-silver;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: vars.$space-md;
+
+          th,
+          td {
+            padding: vars.$space-sm vars.$space-md;
+            border-bottom: 1px solid vars.$color-border;
+            text-align: left;
+            color: vars.$color-text-primary;
+          }
+
+          th {
+            color: vars.$color-silver;
+            font-weight: 600;
+            background: vars.$color-bg-elevated;
+          }
+
+          tr:hover {
+            background: vars.$color-bg-hover;
+          }
+        }
+      }
     }
   }
 
-  .actions {
-    display: flex;
-    gap: 10px;
-
-    button {
-      min-width: 36px;
-      height: 36px;
-      padding: 0 12px;
-      border-radius: 8px;
-    }
+  > div:last-child button {
+    @include mixins.btn-outline;
+    padding: 0.5rem 1rem;
+    border-radius: vars.$radius-md;
   }
 }

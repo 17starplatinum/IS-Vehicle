@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, timer, defer, EMPTY } from 'rxjs';
-import { map, retryWhen, delayWhen, tap, switchMap, shareReplay, takeUntil, catchError } from 'rxjs/operators';
-
+import { map, retryWhen, delayWhen, tap, shareReplay, takeUntil, catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 export type ServerResource = 'vehicle' | 'coordinates' | 'unknown';
 export type ServerAction = 'CREATED' | 'UPDATED' | 'DELETED' | 'RESET_DISTANCE' | string;
 
@@ -14,10 +14,11 @@ export interface WsEvent {
 
 @Injectable({ providedIn: 'root' })
 export class WsService implements OnDestroy {
+  private baseUrl = environment.apiUrl;
   private stop$ = new Subject<void>();
   public events$: Observable<WsEvent>;
 
-  private url = '/vehicles-updates';
+  private url = this.baseUrl + '/vehicles-updates';
 
   constructor() {
     this.events$ = this.createWsStream().pipe(

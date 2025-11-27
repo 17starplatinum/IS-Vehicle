@@ -1,14 +1,10 @@
-import { Component, OnInit, ViewChild, OnDestroy, Inject, Optional } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { Component, OnInit, OnDestroy, Inject, Optional } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import * as CoordsActions from '../../store/actions/coords.actions'
-import { selectCoordinatesList } from '../../store/selectors/coords.selector';
-import { Coordinates } from '../../store/models/coords.models';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CreateCoordinatesRequest } from '../../store/models/coords.models';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-coords-form-dialog',
@@ -17,46 +13,42 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dial
   styleUrls: ['./coordinates-form-dialog.component.scss']
 })
 export class CoordsFormDialogComponent implements OnInit, OnDestroy {
-  dataSource = new MatTableDataSource<Coordinates>([]);
-  displayedColumns = ['id', 'x', 'y'];
-  loading$: Observable<any[]>;
+  form!: FormGroup;
   private destroy$ = new Subject<void>();
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
   constructor(
+    private fb: FormBuilder,
     private store: Store,
-    private dialog: MatDialog,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any | null,
-    @Optional() public dialogRef: MatDialogRef<CoordsFormDialogComponent> | null
+    @Optional() public dialogRef: MatDialogRef<CoordsFormDialogComponent> | null,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any | null
   ) {
-    this.loading$ = this.store.select(selectCoordinatesList)
   }
-  ngOnInit() {
-    this.store.select(selectCoordinatesList).pipe(takeUntil(this.destroy$)).subscribe(list => {
-      this.dataSource.data = list || [];
+
+  ngOnInit(): void {
+    this.form = this.fb.group({
+        x: [0, [Validators.required]],
+        y: [0, [Validators.required]]
     });
 
-    this.store.dispatch(CoordsActions.loadCoordinatesList({page: 1, pageSize: 10, sortBy: 'id', ascending: true}));
+    if (this.data?.coordinates) {
+      this.form.patchValue({
+        x: this.data.coordinates.x,
+        y: this.data.coordinates.y
+      });
+    }
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  async submit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
-  openCreate() {
-    const ref = this.dialog.open(CoordsFormDialogComponent, { width: '400px', data: { mode: 'create' } });
-  }
-
-  openEdit(coord: Coordinates) {
-    this.dialog.open(CoordsFormDialogComponent, { width: '400px', data: { mode: 'edit', coord } });
-  }
-
-  delete(id: number) {
-    if (!confirm('Delete coordinate?')) return;
-    this.store.dispatch(CoordsActions.deleteCoordinates({ id }));
+    const c = this.form.value;
+    const x = c.x;
+    const y = c.y;
+    const coordPayload: CreateCoordinatesRequest = { x: Number(x), y: Number(y) };
+    this.store.dispatch(CoordsActions.createCoordinates({ coordinates: coordPayload }));
   }
 
   ngOnDestroy() {

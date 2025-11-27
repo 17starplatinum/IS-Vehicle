@@ -12,6 +12,6 @@ export const appConfig: ApplicationConfig = {
   ]
 };
 
-export const API_PATH_VEHICLES = '/api/v1/vehicles';
-export const API_PATH_COORDS = '/api/v1/coordinates';
+export const API_PATH_VEHICLES = '/vehicles';
+export const API_PATH_COORDS = '/coordinates';
 export const SPECIAL_API_POSTFIX = '/special';

@@ -1,232 +1,129 @@
-@use '../../../../../styles' as *;
+@use '../../../../../styles/variables' as vars;
+@use '../../../../../styles/mixins' as mixins;
+@use '../../../../../styles/utils' as utils;
+@use '../../../../../styles/layout' as layouts;
 
 .vehicles-page {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding: 18px 0;
-  color: $color-white;
-  font-family: $font-primary;
+  gap: vars.$space-lg;
 
-  .page-header {
+  &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding: 6px 12px;
+    margin-bottom: vars.$space-md;
 
-    .left {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-
-      .title {
-        font-family: $font-secondary;
-        font-size: 1.25rem;
-        color: $color-white;
-        letter-spacing: 0.6px;
-        margin: 0;
-      }
-
-      .subtitle {
-        color: rgba($color-white, 0.65);
-        font-size: 0.9rem;
-        margin-left: 6px;
-      }
-    }
-
-    .actions {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-
-      .btn-create {
-        @include outline-button($color-gold);
-        padding: 8px 14px;
-        border-radius: 8px;
-        font-weight: 700;
-      }
-
-      .secondary {
-        @include outline-button($color-silver);
-      }
+    h1 {
+      font-size: vars.$fs-xl;
     }
   }
 
-  .special-ops-wrapper {
-    @extend .card !optional;
-    @include carbon-fiber-bg;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid rgba($color-white, 0.04);
+  &__filters {
+    @include mixins.card;
+    padding: vars.$space-md;
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$space-md;
 
-    .ops-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-
-      .op {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-    }
-
-    .status {
-      margin-top: 10px;
-
-      .result-card {
-        @include carbon-fiber-bg;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid rgba($color-white, 0.03);
-      }
-
-      .error {
-        background: rgba(255,0,0,0.05);
-        color: #ffbdbd;
-        padding: 8px;
-        border-radius: 6px;
-      }
+    mat-form-field {
+      width: 250px;
+      min-width: 200px;
     }
   }
 
-  .vehicles-card {
-    @include carbon-fiber-bg;
-    border-radius: 12px;
-    padding: 8px;
-    border: 1px solid rgba($color-white, 0.04);
-    background-clip: padding-box;
-
-    .table-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 8px;
-
-      .left {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-
-      .right {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-
-      .search {
-        min-width: 220px;
-        .mat-form-field-infix {
-          background: rgba(255,255,255,0.02);
-        }
-      }
-    }
-
-    .table-wrapper {
-      overflow: auto;
-      border-radius: 8px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
-      padding: 6px;
-
-      table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        font-family: $font-alt;
-
-        thead th {
-          position: sticky;
-          top: 0;
-          background: rgba(0,0,0,0.45);
-          padding: 10px 12px;
-          text-align: left;
-          font-weight: 700;
-          color: $color-white;
-          z-index: 2;
-          cursor: pointer;
-        }
-
-        tbody td {
-          padding: 10px 12px;
-          color: $color-silver;
-          border-bottom: 1px dashed rgba(255,255,255,0.02);
-          vertical-align: middle;
-        }
-
-        tr:hover td {
-          background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-          color: $color-white;
-        }
-
-        .actions {
-          display: flex;
-          gap: 8px;
-          justify-content: flex-end;
-
-          button {
-            @include outline-button($color-silver);
-            padding: 6px 8px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-          }
-
-          .edit { @include outline-button($color-gold); }
-          .delete { @include outline-button(#ff6b6b); }
-        }
-      }
-    }
-
-    .paginator-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 8px;
-
-      .range { color: $color-silver; }
-      .controls { display: flex; gap: 6px; align-items: center; }
-    }
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: vars.$space-xl;
   }
 
-  .empty {
-    @extend .card !optional;
-    padding: 28px;
-    text-align: center;
-    color: rgba($color-white, 0.8);
-
-    .hint { color: $color-silver; margin-top: 6px; }
+  &__table {
+    @include mixins.card;
+    padding: vars.$space-md;
   }
 
-  .muted { color: $color-silver; }
-  .link-gold { color: $color-gold; text-decoration: none; &:hover { text-decoration: underline; } }
-}
+  &__side-panel {
+    @include mixins.card;
+    padding: vars.$space-md;
+    height: fit-content;
+    position: sticky;
+    top: vars.$space-xl;
+  }
 
-@media (max-width: 960px) {
-  .vehicles-page {
-    .special-ops-wrapper .ops-grid { grid-template-columns: 1fr; }
-    .vehicles-card .table-toolbar { flex-direction: column; align-items: stretch; }
-    .vehicles-card .table-wrapper table thead th:nth-child(n+8) { display: none; }
+  &__details {
+    @include mixins.card;
+    padding: vars.$space-md;
+    margin-top: vars.$space-lg;
   }
 }
 
-@media (max-width: 600px) {
-  .vehicles-page {
-    padding: 12px 8px;
-    .page-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .vehicles-card .table-wrapper { padding: 4px; }
-    .vehicles-card .paginator-row { flex-direction: column; gap: 8px; align-items: stretch; }
-  }
+.table-controls {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.gold-pulse {
-  display: inline-block;
-  animation: pulse 2.4s ease-in-out infinite;
-  box-shadow: 0 0 10px rgba($color-gold, 0.06);
+.controls-left {
+  flex: 1 1 auto;
+  min-width: 0;
 }
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.02); opacity: 0.9; }
-  100% { transform: scale(1); opacity: 1; }
+
+.filters-inline {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.filter-pill {
+  display: flex;
+  margin-right: 16px;
+  margin-bottom: 12px;
+  gap: 0.5rem;
+  align-items: center;
+  background: #1e1e1e;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 0.4rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+
+.filter-field {
+  width: 140px;
+  margin: 0;
+}
+
+.filter-field.small {
+  width: 90px;
+}
+
+.filter-pill button {
+  height: 36px;
+  align-self: center;
+  padding: 0 0.7rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 880px) {
+  .table-controls {
+    align-items: stretch;
+  }
+  .filters-inline {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .filter-pill {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .filter-field {
+    width: 45%;
+  }
+  .filter-field.small {
+    width: 40%;
+  }
 }

@@ -1,202 +1,74 @@
-@use '../../../../../styles' as *;
+.table-wrapper {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
 
-.coords-table-card {
-  @include carbon-fiber-bg;
-  border-radius: 10px;
-  padding: 8px;
-  border: 1px solid rgba($color-white, 0.04);
-  background-clip: padding-box;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-  color: $color-white;
-  font-family: $font-alt;
+:host {
+  --mat-table-header-headline-color: #e0e0e0;
+  --mat-sys-on-surface: #e0e0e0;
+}
 
-  .toolbar {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
+mat-row,
+mat-header-row {
+  justify-content: center;
+  color: #e0e0e0;
+  height: 48px;
+}
 
-    .left {
-      display: flex;
-      gap: 8px;
-      align-items: center;
+mat-cell,
+mat-header-cell {
+  justify-content: center;
+  color: #e0e0e0;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
 
-      .search {
-        min-width: 220px;
-        .mat-form-field-wrapper { background: rgba(255,255,255,0.01); }
-      }
-
-      .filter {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-    }
-
-    .right {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-  }
-
-  .table-wrapper {
-    overflow: auto;
-    border-radius: 8px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
-    padding: 6px;
-
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      color: $color-silver;
-      font-size: 0.95rem;
-
-      thead {
-        th {
-          position: sticky;
-          top: 0;
-          background: rgba(0,0,0,0.45);
-          padding: 10px 12px;
-          text-align: left;
-          font-weight: 700;
-          color: $color-white;
-          z-index: 2;
-          cursor: pointer;
-          user-select: none;
-
-          .sort-indicator {
-            margin-left: 8px;
-            opacity: 0.65;
-            font-size: 0.9rem;
-          }
-        }
-      }
-
-      tbody {
-        tr {
-          transition: background 0.12s ease, color 0.12s ease;
-          &:hover {
-            background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-            td { color: $color-white; }
-          }
-        }
-
-        td {
-          padding: 10px 12px;
-          vertical-align: middle;
-          border-bottom: 1px dashed rgba(255,255,255,0.03);
-
-          &.id {
-            font-weight: 700;
-            color: $color-white;
-            width: 72px;
-          }
-
-          &.actions {
-            width: 160px;
-            display: flex;
-            gap: 8px;
-            justify-content: flex-end;
-            align-items: center;
-
-            button {
-              @include outline-button($color-silver);
-              padding: 6px 8px;
-              border-radius: 6px;
-              font-size: 0.85rem;
-            }
-
-            .btn-edit { @include outline-button($color-gold); }
-            .btn-delete { @include outline-button(#ff6b6b); }
-          }
-
-          a {
-            color: $color-gold;
-            text-decoration: none;
-            &:hover { text-decoration: underline; color: lighten($color-gold, 3%); }
-          }
-        }
-      }
-    }
-  }
-
-  .paginator-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 8px;
-
-    .left-info {
-      color: $color-silver;
-      font-size: 0.9rem;
-    }
-
-    .mat-paginator {
-      .mat-paginator-range-label { color: $color-silver; }
-      .mat-select-value { color: $color-white; }
-      button.mat-paginator-navigation-next,
-      button.mat-paginator-navigation-previous {
-        color: $color-white;
-      }
-    }
-  }
-
-  .empty {
-    padding: 28px;
-    text-align: center;
-    color: rgba($color-white, 0.8);
-    .hint { color: $color-silver; margin-top: 6px; }
+mat-header-cell {
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  justify-content: center;
+  color: #e0e0e0;
+  &:hover {
+    opacity: 0.75;
   }
 }
 
-.coords-table-compact {
-  .table-wrapper { padding: 4px; }
-  table thead th { padding: 8px 10px; }
-  table tbody td { padding: 8px 10px; }
+.sort-active {
+  font-weight: 700;
+  text-decoration: underline;
 }
 
-.filter-chips {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
+mat-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+  transition: background 0.15s ease;
+}
 
-  .chip {
-    @include outline-button($color-silver);
-    background: rgba(255,255,255,0.01);
-    color: $color-white;
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 0.85rem;
+mat-cell:last-child,
+mat-header-cell:last-child {
+  text-align: center;
+  width: 160px;
+}
+
+button[mat-button] {
+  margin-right: 4px;
+}
+
+a {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
   }
 }
 
-button:focus, a:focus, input:focus, select:focus {
-  outline: 2px solid rgba($color-gold, 0.14);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba($color-gold, 0.03);
+mat-paginator {
+  margin-top: 12px;
 }
-
-@media (max-width: 920px) {
-  .coords-table-card {
-    .toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
-    .table-wrapper { overflow-x: auto; }
-    .coords-table-card .paginator-row { flex-direction: column; gap: 8px; align-items: stretch; }
-    table thead th:nth-child(n+7) { display: none; }
-  }
-}
-
-@media (max-width: 520px) {
-  .coords-table-card {
-    .toolbar .search { min-width: 100%; }
-    table tbody td .actions { justify-content: flex-start; gap: 6px; }
-  }
-}
-
-.tc { text-align: center; }
-.tl { text-align: left; }
-.tr { text-align: right; }
-.hidden-mobile { @media (max-width: 520px) { display: none !important; } }

@@ -1,10 +1,18 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, Input } from '@angular/core';
 import { VehiclesFacade } from '../../vehicles.facade';
 import { Observable, Subject } from 'rxjs';
 import { Vehicle } from '../../store/models/vehicles.models';
 import { MatDialog } from '@angular/material/dialog';
 import { VehicleFormDialogComponent } from '../../components/forms/vehicle-form-dialog.component';
 import { takeUntil } from 'rxjs/operators';
+import {
+  selectSpecialOpsLoading,
+  selectSpecialOpsResult,
+  selectSpecialOpsError,
+  selectSpecialOpsCurrentOp
+} from '../../store/selectors/special-ops.selector';
+import * as VehicleActions from '../../store/actions/vehicles.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-vehicles-page',
@@ -19,14 +27,25 @@ export class VehiclesPageComponent implements OnInit, OnDestroy {
   page$: Observable<number>;
   pageSize$: Observable<number>;
   total$: Observable<number>;
+  
   private destroy$ = new Subject<void>();
+  @Input() result$: Observable<any>
+  @Input() error$: Observable<any>;
+  @Input() currentOp$: Observable<string | null | undefined>;
+  @Input() threshold: string | null = null;
+  @Input() minPower: number | null = null;
+  @Input() maxPower: number | null = null;
 
-  constructor(private facade: VehiclesFacade, private dialog: MatDialog) {
+  constructor(private facade: VehiclesFacade, private dialog: MatDialog, private store: Store) {
     this.vehicles$ = this.facade.list$;
     this.loading$ = this.facade.loading$;
     this.page$ = this.facade.page$;
     this.pageSize$ = this.facade.pageSize$;
     this.total$ = this.facade.total$;
+    this.loading$ = this.store.select(selectSpecialOpsLoading);
+    this.result$ = this.store.select(selectSpecialOpsResult);
+    this.error$ = this.store.select(selectSpecialOpsError);
+    this.currentOp$ = this.store.select(selectSpecialOpsCurrentOp);
   }
 
   ngOnInit(): void {
@@ -35,17 +54,31 @@ export class VehiclesPageComponent implements OnInit, OnDestroy {
 
   openCreateDialog() {
     const ref = this.dialog.open(VehicleFormDialogComponent, {
-      width: '720px',
+      width: '1080px',
+      maxWidth: '92vw',
+      minWidth: '420px',
+      panelClass: 'vehicle-form-dialog-panel',
       data: { mode: 'create' }
     });
 
-    ref.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(result => {
+    ref.afterClosed().pipe(takeUntil(this.destroy$)).subscribe(() => {
     });
+  }
+
+  runFilterByFuelType() {
+    this.store.dispatch(VehicleActions.loadVehicles({page: 1, pageSize: 10, sortBy: 'id', ascending: true, fuelType: this.threshold, min: null, max: null, filter: ""}));
+  }
+
+  runFindByPowerRange() {
+    this.store.dispatch(VehicleActions.loadVehicles({page: 1, pageSize: 10, sortBy: 'id', ascending: true, fuelType: "", min: null, max: null, filter: ""}));
   }
 
   onEdit(vehicle: Vehicle) {
     this.dialog.open(VehicleFormDialogComponent, {
-      width: '720px',
+      width: '1080px',
+      maxWidth: '92vw',
+      minWidth: '420px',
+      panelClass: 'vehicle-form-dialog-panel',
       data: { mode: 'edit', vehicle }
     });
   }

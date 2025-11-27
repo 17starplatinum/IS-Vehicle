@@ -1,0 +1,195 @@
+@use '../../../../../styles' as *;
+
+.coords-detail-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px 0;
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+
+    .title {
+      font-family: $font-secondary;
+      font-size: 1.25rem;
+      color: $color-white;
+      letter-spacing: 0.6px;
+      margin: 0;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      .btn {
+        @include outline-button($color-silver);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        &.danger {
+          @include outline-button(#ff6b6b);
+        }
+        &.gold {
+          @include outline-button($color-gold);
+        }
+      }
+    }
+  }
+
+  .detail-card {
+
+    @extend .card !optional;
+    @include carbon-fiber-bg;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid rgba($color-white, 0.04);
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 16px;
+    align-items: start;
+
+    .attributes {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .kv-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px 16px;
+
+        .kv {
+          display: flex;
+          flex-direction: column;
+          .k {
+            color: $color-silver;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+          }
+          .v {
+            color: $color-white;
+            font-family: $font-alt;
+            font-weight: 700;
+            font-size: 0.98rem;
+            word-break: break-word;
+          }
+        }
+      }
+
+      .description {
+        margin-top: 8px;
+        color: $color-silver;
+        font-size: 0.95rem;
+        line-height: 1.45;
+        background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.02);
+      }
+    }
+
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .map-preview {
+        height: 220px;
+        border-radius: 10px;
+        overflow: hidden;
+        background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.5));
+        border: 1px solid rgba(255,255,255,0.04);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba($color-white, 0.85);
+        font-family: $font-alt;
+        font-size: 0.95rem;
+        text-align: center;
+
+        &.empty {
+          opacity: 0.8;
+        }
+      }
+
+      .quick {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .meta {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 10px;
+          border-radius: 8px;
+          background: rgba(255,255,255,0.01);
+          border: 1px solid rgba(255,255,255,0.02);
+
+          .label { color: $color-silver; font-size: 0.85rem; }
+          .value { color: $color-white; font-weight: 700; }
+        }
+
+        .actions-row {
+          display: flex;
+          gap: 8px;
+          button {
+            @include outline-button($color-silver);
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 0;
+            flex: 1;
+            font-weight: 600;
+            &.primary {
+              @include outline-button($color-gold);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .history {
+    @extend .card !optional;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba($color-white, 0.03);
+
+    .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 8px;
+      border-bottom: 1px dashed rgba(255,255,255,0.02);
+      .time { color: $color-silver; font-size: 0.85rem; width: 120px; }
+      .msg { color: $color-white; font-family: $font-alt; font-size: 0.95rem; }
+    }
+  }
+}
+
+@media (max-width: 880px) {
+  .coords-detail-page {
+    .detail-card {
+      grid-template-columns: 1fr;
+      .side-panel { order: 2; }
+      .attributes { order: 1; }
+    }
+
+    .page-header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}
+
+.center-muted {
+  color: $color-silver;
+  text-align: center;
+  padding: 12px;
+}

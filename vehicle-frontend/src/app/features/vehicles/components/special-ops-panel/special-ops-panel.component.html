@@ -2,56 +2,41 @@
   <h3>Special operations</h3>
 
   <div class="op-row">
-    <button mat-flat-button color="primary" (click)="runSum()">Sum fuel consumption</button>
-    <button mat-flat-button (click)="runGroup()">Group by fuelConsumption</button>
+    <button mat-flat-button color="primary" (click)="runSum()">Сумма топлив</button>
+    <button mat-flat-button (click)="runGroup()">Сгруппировать по топливу</button>
   </div>
 
   <div class="op-row">
     <mat-form-field appearance="outline" class="small">
-      <mat-label>Fuel threshold</mat-label>
-      <input matInput type="number" [(ngModel)]="threshold" />
-    </mat-form-field>
-    <button mat-flat-button color="primary" (click)="runFilterByFuelType()">Filter by fuelType < threshold</button>
-  </div>
-
-  <div class="op-row">
-    <mat-form-field appearance="outline" class="small">
-      <mat-label>min engine power</mat-label>
-      <input matInput type="number" [(ngModel)]="minPower" />
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="small">
-      <mat-label>max engine power</mat-label>
-      <input matInput type="number" [(ngModel)]="maxPower" />
-    </mat-form-field>
-    <button mat-flat-button color="primary" (click)="runFindByPowerRange()">Find by engine power range</button>
-  </div>
-
-  <div class="op-row">
-    <mat-form-field appearance="outline" class="small">
-      <mat-label>Vehicle id</mat-label>
+      <mat-label>ID транспорта</mat-label>
       <input matInput type="number" [(ngModel)]="resetId" />
     </mat-form-field>
-    <button mat-flat-button color="warn" (click)="runResetDistance()">Reset distance to zero</button>
+    <button mat-flat-button color="warn" (click)="runResetDistance()">Скрутить расстояние до 0</button>
   </div>
 
   <div class="status">
     <mat-progress-bar *ngIf="(loading$ | async)" mode="indeterminate"></mat-progress-bar>
 
     <ng-container *ngIf="(error$ | async) as err">
-      <mat-card class="error">Error: {{ err | json }}</mat-card>
+      <mat-card class="error">Ошибка: {{ err | json }}</mat-card>
     </ng-container>
 
     <ng-container *ngIf="(result$ | async) as res">
       <mat-card class="result">
-        <h4>Result ({{ (currentOp$ | async) || 'unknown' }})</h4>
+        <h4>Результат операции ({{ (currentOp$ | async) || 'unknown' }})</h4>
 
-        <div *ngIf="typeof res === 'number'">
-          <p>Total fuel consumption: {{ res }}</p>
+        <div *ngIf="isNumber(res?.message)">
+          <p>Сумма потребления топлив: {{ res.message }}</p>
         </div>
 
         <div *ngIf="isArray(res) && res.length && res[0].fuelConsumption !== undefined">
           <table>
-            <thead><tr><th>FuelConsumption</th><th>Count</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Потребление топлив</th>
+                <th>Количество</th>
+              </tr>
+            </thead>
             <tbody>
               <tr *ngFor="let g of res">
                 <td>{{ g.fuelConsumption }}</td>
@@ -60,29 +45,14 @@
             </tbody>
           </table>
         </div>
-
-        <div *ngIf="isArray(res) && res.length && res[0].id !== undefined && res[0].name !== undefined">
-          <table>
-            <thead><tr><th>ID</th><th>Name</th><th>EnginePower</th><th>FuelConsumption</th></tr></thead>
-            <tbody>
-              <tr *ngFor="let v of res">
-                <td>{{ v.id }}</td>
-                <td>{{ v.name }}</td>
-                <td>{{ v.enginePower }}</td>
-                <td>{{ v.fuelConsumption }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div *ngIf="res === undefined || res === null">
-          <p>Operation finished (no body returned).</p>
+        <div *ngIf="res === null || res === undefined">
+          <p>Операция выполнена успешно.</p>
         </div>
       </mat-card>
     </ng-container>
   </div>
 
   <div style="margin-top:8px;">
-    <button mat-button (click)="clear()">Clear</button>
+    <button mat-button (click)="clear()">Очистить</button>
   </div>
 </div>

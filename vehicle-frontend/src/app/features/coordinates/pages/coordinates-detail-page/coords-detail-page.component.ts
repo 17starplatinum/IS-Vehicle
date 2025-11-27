@@ -11,7 +11,6 @@ import { CoordsFormDialogComponent } from '../../components/forms/coordinates-fo
   selector: 'app-coords-detail-page',
   standalone: false,
   templateUrl: './coords-detail-page.component.html',
-  styleUrls: ['./coords-detail-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoordinatesDetailPageComponent implements OnInit, OnDestroy {

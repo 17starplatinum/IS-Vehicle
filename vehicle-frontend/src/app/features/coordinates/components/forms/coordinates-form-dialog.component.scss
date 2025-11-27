@@ -1,123 +1,163 @@
-@use '../../../../../styles' as *;
+@use '../../../../../styles/index' as *;
 
-.w100 {
+:host {
+  display: block;
   width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+  color: $color-white;
 }
 
-.coords-form {
+.coords-form-dialog {
+  @include card;
+  padding: $space-lg;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 12px;
-  font-family: $font-primary;
+  gap: $space-lg;
+}
 
-  .form-card {
-    @include carbon-fiber-bg;
-    background-clip: padding-box;
-    border-radius: 8px;
-    padding: 12px;
-    border: 1px solid rgba($color-white, 0.04);
+.header {
+  @include flex-between;
+  gap: $space-md;
+
+  h2 {
+    margin: 0;
+    font-size: $fs-lg;
+    font-weight: 700;
+    color: $color-gold;
   }
 
-  form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    align-items: start;
+  .meta {
+    font-size: $fs-sm;
+    color: $color-silver;
+  }
+}
 
-    &.single-column {
-      grid-template-columns: 1fr;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.form-main {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+
+  label {
+    font-size: $fs-sm;
+    color: $color-silver;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .control {
+    @include input-base();
+    height: $form-control-height;
+    display: flex;
+    align-items: center;
+    padding: 0 $space-sm;
+    box-sizing: border-box;
+    width: 100%;
+
+    &.select {
+      background: $color-black;
+      border-radius: $radius-sm;
     }
 
-    .full {
-      grid-column: 1 / -1;
+    &.has-error {
+      border-color: rgba($color-gold, 0.28);
+      box-shadow: 0 0 0 3px rgba($color-gold, 0.06);
     }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-
-      label {
-        font-size: 0.85rem;
-        color: $color-silver;
-        font-weight: 600;
-      }
-
-      .mat-form-field {
-        width: 100%;
-        .mat-form-field-infix {
-          background: rgba(255,255,255,0.02);
-          color: $color-white;
-        }
-      }
-
-      input, textarea, select {
-        background: transparent;
-        color: $color-white;
-        border: 1px solid rgba($color-white, 0.06);
-        padding: 8px;
-        border-radius: 6px;
-        font-family: $font-primary;
-        font-size: 0.95rem;
-      }
-
-      .mat-error, .error-text {
-        color: #ff8b8b;
-        font-size: 0.85rem;
-        margin-top: 4px;
-      }
-    }
-
-    .actions {
-      grid-column: 1 / -1;
-      display: flex;
-      gap: 8px;
-      justify-content: flex-end;
-      margin-top: 8px;
-
-      button {
-        min-width: 96px;
-        border-radius: 8px;
-        padding: 8px 12px;
-        font-weight: 700;
-        text-transform: none;
-      }
-
-      .btn-cancel {
-        @include outline-button($color-silver);
-        background: transparent;
-        color: $color-silver;
-      }
-
-      .btn-submit {
-        @include outline-button($color-gold);
-        background: $color-gold;
-        color: $color-black;
-        &:hover { filter: brightness(0.95); }
-      }
-
-      .btn-ghost {
-        background: transparent;
-        border: 1px solid rgba(255,255,255,0.06);
-        color: $color-silver;
-        &:hover { color: $color-white; background: rgba(255,255,255,0.02); }
-      }
+    input, textarea, select {
+      border: none;
+      background: transparent;
+      color: $color-white;
+      width: 100%;
+      font-size: $fs-base;
+      outline: none;
     }
   }
 
   .hint {
-    font-size: 0.9rem;
-    color: rgba($color-white, 0.75);
+    font-size: $fs-sm;
+    color: $color-silver;
+  }
+
+  .error {
+    font-size: $fs-sm;
+    color: #ff8b8b;
+    margin-top: 4px;
   }
 }
 
-@media (max-width: 720px) {
-  .coords-form {
-    form { grid-template-columns: 1fr; }
+.actions {
+  display: flex;
+  gap: $space-sm;
+  justify-content: flex-end;
+  margin-top: $space-md;
 
-    .actions { justify-content: stretch; flex-direction: column;
-      button { width: 100%; }
+  button {
+    padding: 8px 14px;
+    border-radius: $radius-sm;
+    border: 1px solid $color-border;
+    background: $color-bg-secondary;
+    color: $color-white;
+    font-weight: 700;
+    cursor: pointer;
+    @include transition(background, transform, border-color);
+
+    &.primary {
+      background: linear-gradient(180deg, rgba($color-gold,0.14), rgba($color-gold,0.06));
+      border-color: rgba($color-gold, 0.28);
+      color: $color-black;
     }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    &:hover:not(:disabled) { transform: translateY(-2px); }
+  }
+}
+
+.form-errors {
+  background: rgba(#ff8b8b, 0.06);
+  border: 1px solid rgba(#ff8b8b, 0.14);
+  color: #ff8b8b;
+  padding: $space-sm;
+  border-radius: $radius-sm;
+  font-size: $fs-sm;
+}
+
+.small-muted { font-size: $fs-sm; color: $color-silver; }
+
+:focus-visible {
+  outline: 3px solid rgba($color-gold, 0.14);
+  outline-offset: 2px;
+}
+
+@include mobile {
+  :host {
+    max-width: 100%;
+    padding: 0 $space-md;
+  }
+  
+  .actions {
+    justify-content: stretch;
+    button { width: 100%; }
+  }
+  
+  .form-main {
+    gap: $space-sm;
   }
 }

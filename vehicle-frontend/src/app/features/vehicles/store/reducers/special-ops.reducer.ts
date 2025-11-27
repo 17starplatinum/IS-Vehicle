@@ -59,7 +59,6 @@ export const specialOpsFeature = createFeature({
   })
 });
 
-// Экспортируем нужные селекторы и ключ
 export const {
   name: specialOpsFeatureKey,
   reducer: specialOpsFeatureReducer,

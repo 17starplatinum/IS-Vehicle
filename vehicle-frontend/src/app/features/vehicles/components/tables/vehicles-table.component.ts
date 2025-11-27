@@ -77,7 +77,9 @@ export class VehiclesTableComponent implements OnInit {
                 page: ev.pageIndex,
                 pageSize: ev.pageSize,
                 sortBy: this.sort.active,
-                ascending: (this.sort.direction || null) as any
+                ascending: (this.sort.direction || null) as any,
+                fuelType: "",
+                min: null, max: null, filter: ""
             }));
         });
 
@@ -87,7 +89,9 @@ export class VehiclesTableComponent implements OnInit {
                 page: 0,
                 pageSize: this.paginator.pageSize,
                 sortBy: this.sort.active,
-                ascending: (this.sort.direction || null) as any
+                ascending: (this.sort.direction || null) as any,
+                fuelType: "",
+                min: null, max: null, filter: ""
             }));
         });
     }
@@ -99,10 +103,12 @@ export class VehiclesTableComponent implements OnInit {
 
     loadVehicles() {
         this.store.dispatch(VehiclesActions.loadVehicles({
-        page: this.page,
-        pageSize: this.pageSize,
-        sortBy: this.sortBy,
-        ascending: this.ascending
+            page: this.page,
+            pageSize: this.pageSize,
+            sortBy: this.sortBy,
+            ascending: this.ascending,
+            fuelType: "",
+            min: null, max: null, filter: ""
         }));
     }
 

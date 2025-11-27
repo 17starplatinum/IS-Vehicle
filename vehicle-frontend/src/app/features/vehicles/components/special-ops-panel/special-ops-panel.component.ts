@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Output, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as SpecialOpsActions from '../../store/actions/special-ops.actions';
@@ -22,10 +22,6 @@ export class SpecialOpsPanelComponent {
   @Input() error$: Observable<any>;
   @Input() currentOp$: Observable<string | null | undefined>;
 
-  // local inputs for ops
-  @Input()  threshold: string | null = null;
-  @Input() minPower: number | null = null;
-  @Input() maxPower: number | null = null;
   @Input() resetId: number | null = null;
 
   constructor(private store: Store) {
@@ -43,20 +39,6 @@ export class SpecialOpsPanelComponent {
     this.store.dispatch(SpecialOpsActions.specialOpTriggered({ op: 'groupByFuelConsumption' }));
   }
 
-  runFilterByFuelType() {
-    this.store.dispatch(SpecialOpsActions.specialOpTriggered({
-      op: 'filterByFuelTypeLessThan',
-      payload: { threshold: this.threshold }
-    }));
-  }
-
-  runFindByPowerRange() {
-    this.store.dispatch(SpecialOpsActions.specialOpTriggered({
-      op: 'findByEnginePowerRange',
-      payload: { min: Number(this.minPower), max: Number(this.maxPower) }
-    }));
-  }
-
   runResetDistance() {
     this.store.dispatch(SpecialOpsActions.specialOpTriggered({
       op: 'resetDistanceToZero',
@@ -68,5 +50,9 @@ export class SpecialOpsPanelComponent {
   }
   clear() {
     this.store.dispatch(SpecialOpsActions.specialOpClear());
+  }
+
+  isNumber(value: any): value is number {
+    return typeof value === 'number';
   }
 }

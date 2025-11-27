@@ -1,86 +1,74 @@
-@use '../../../../../styles.scss' as *;
-
-.vehicles-table-container {
-  background: $color-bg-secondary;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: $shadow-card;
-  border: 1px solid $color-border;
-}
-
-.table-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-
-  h2 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 600;
-    color: $color-text;
-  }
-
-  .actions {
-    display: flex;
-    gap: 12px;
-
-    button {
-      border-radius: 8px;
-      padding: 6px 14px;
-    }
-  }
-}
-
-table {
+.table-wrapper {
+  display: block;
   width: 100%;
-  background: transparent;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
 
-  th {
-    background: $color-bg-primary;
-    color: $color-accent-silver;
-    font-weight: 600;
-    font-size: 14px;
-    border-bottom: 1px solid $color-border-light !important;
-  }
+:host {
+  --mat-table-header-headline-color: #e0e0e0;
+  --mat-sys-on-surface: #e0e0e0;
+}
 
-  td {
-    background: $color-bg-secondary;
-    color: $color-text;
-    border-bottom: 1px solid $color-border !important;
-    transition: background 0.2s ease;
-  }
+mat-row,
+mat-header-row {
+  justify-content: center;
+  color: #e0e0e0;
+  height: 48px;
+}
 
-  tr:hover td {
-    background: $color-bg-hover;
+mat-cell,
+mat-header-cell {
+  justify-content: center;
+  color: #e0e0e0;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+mat-header-cell {
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  justify-content: center;
+  color: #e0e0e0;
+  &:hover {
+    opacity: 0.75;
   }
 }
 
-.actions-cell {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
+.sort-active {
+  font-weight: 700;
+  text-decoration: underline;
+}
 
-  button {
-    min-width: 38px;
-    height: 36px;
-    padding: 0 12px;
-    border-radius: 8px;
+mat-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+  transition: background 0.15s ease;
+}
+
+mat-cell:last-child,
+mat-header-cell:last-child {
+  text-align: center;
+  width: 160px;
+}
+
+button[mat-button] {
+  margin-right: 4px;
+}
+
+a {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
   }
 }
 
-.mat-mdc-paginator {
-  background: $color-bg-secondary;
-  color: $color-text;
-  border-radius: 10px;
+mat-paginator {
   margin-top: 12px;
-
-  .mat-mdc-select-value,
-  .mat-mdc-paginator-range-label {
-    color: $color-text-muted;
-  }
-
-  .mat-mdc-icon-button {
-    color: $color-accent-silver;
-  }
 }

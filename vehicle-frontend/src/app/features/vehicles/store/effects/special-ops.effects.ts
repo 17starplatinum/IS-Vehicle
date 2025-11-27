@@ -32,20 +32,6 @@ export class SpecialOpsEffects {
             );
             break;
 
-          case 'filterByFuelTypeLessThan':
-            request$ = this.api.getByFuelTypeLess(payload?.threshold).pipe(
-              map((arr) => SpecialOpsActions.specialOpSuccess({ op, result: arr })),
-              catchError(error => of(SpecialOpsActions.specialOpFailure({ op, error: this.serializeError(error) })))
-            );
-            break;
-
-          case 'findByEnginePowerRange':
-            request$ = this.api.getPowerRange(Number(payload?.min), Number(payload?.max)).pipe(
-              map((arr) => SpecialOpsActions.specialOpSuccess({ op, result: arr })),
-              catchError(error => of(SpecialOpsActions.specialOpFailure({ op, error: this.serializeError(error) })))
-            );
-            break;
-
           case 'resetDistanceToZero':
             request$ = this.api.resetTravelledDistance(Number(payload?.id)).pipe(
               map((_) => SpecialOpsActions.specialOpSuccess({ op, result: null })),  // если reset возвращает void, можно вернуть null

@@ -5,7 +5,7 @@ import * as VehiclesSelectors from './store/selectors/vehicles.selector';
 import { Observable } from 'rxjs';
 import { Vehicle } from './store/models/vehicles.models';
 
-@Injectable({ providedIn: 'root' }) // or providedIn feature module
+@Injectable({ providedIn: 'root' })
 export class VehiclesFacade {
   list$: Observable<Vehicle[]>;
   loading$: Observable<boolean>;
@@ -22,8 +22,8 @@ export class VehiclesFacade {
     this.total$ = this.store.select(VehiclesSelectors.selectVehiclesTotal);
   }
 
-  loadPage(page = 0, pageSize = 10, sortBy = 'id', ascending = true) {
-    this.store.dispatch(VehiclesActions.loadVehicles({ page, pageSize, sortBy, ascending }));
+  loadPage(page = 0, pageSize = 10, sortBy = 'id', ascending = true, fuelType = "", min = null, max = null, filter = "") {
+    this.store.dispatch(VehiclesActions.loadVehicles({ page, pageSize, sortBy, ascending, fuelType, min, max, filter }));
   }
 
 
