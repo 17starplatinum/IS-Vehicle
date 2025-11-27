@@ -19,6 +19,6 @@ public class CoordinatesValidator extends GenericRequestValidator<CoordinatesReq
         if (field == null || field.trim().isEmpty()) {
             return true;
         }
-        return validFields.contains(field);
+        return !validFields.contains(field);
     }
 }
