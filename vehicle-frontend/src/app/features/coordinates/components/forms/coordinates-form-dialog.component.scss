@@ -8,7 +8,7 @@
   color: $color-white;
 }
 
-.coords-form-dialog {
+.coordinates-form-dialog {
   @include card;
   padding: $space-lg;
   display: flex;
@@ -37,12 +37,28 @@
   display: flex;
   flex-direction: column;
   gap: $space-lg;
+  grid-template-columns: 1fr 300px;
+  align-items: start;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-main {
   display: flex;
   flex-direction: column;
   gap: $space-md;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-md;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
 .field {
@@ -93,7 +109,7 @@
 
   .error {
     font-size: $fs-sm;
-    color: #ff8b8b;
+    color: $color-danger;
     margin-top: 4px;
   }
 }
@@ -131,15 +147,15 @@
 }
 
 .form-errors {
-  background: rgba(#ff8b8b, 0.06);
-  border: 1px solid rgba(#ff8b8b, 0.14);
-  color: #ff8b8b;
+  background: rgba($color-danger, 0.06);
+  border: 1px solid rgba($color-danger, 0.06);
+  color: $color-danger;
   padding: $space-sm;
   border-radius: $radius-sm;
   font-size: $fs-sm;
 }
 
-.small-muted { font-size: $fs-sm; color: $color-silver; }
+.small-muted { font-size: $fs-sm; color: $color-text-muted; }
 
 :focus-visible {
   outline: 3px solid rgba($color-gold, 0.14);
@@ -147,17 +163,16 @@
 }
 
 @include mobile {
-  :host {
-    max-width: 100%;
-    padding: 0 $space-md;
+  .form {
+    grid-template-columns: 1fr;
   }
-  
+
+  .form-side {
+    order: -1;
+  }
+
   .actions {
     justify-content: stretch;
     button { width: 100%; }
-  }
-  
-  .form-main {
-    gap: $space-sm;
   }
 }

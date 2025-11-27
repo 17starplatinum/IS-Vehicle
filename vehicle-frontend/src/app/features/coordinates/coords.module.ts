@@ -7,6 +7,7 @@ import { CoordsFormDialogComponent } from './components/forms/coordinates-form-d
 import { SharedMaterialModule } from '../../common/shared-material/shared-material.module';
 import { CoordinatesTableComponent } from './components/tables/coords-table.component';
 import { CoordinatesDetailComponent } from './components/details/coords-detail.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CoordinatesDetailComponent } from './components/details/coords-detail.c
   imports: [
     CommonModule,
     SharedMaterialModule,
+    RouterModule,
     CoordinatesRoutingModule
   ],
   providers: []
