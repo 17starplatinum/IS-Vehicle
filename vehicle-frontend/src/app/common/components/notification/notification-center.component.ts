@@ -3,10 +3,16 @@ import { NotificationService } from '../notification.service';
 import { NotificationItem } from '../notification.models';
 import { Subscription, timer } from 'rxjs';
 import { trigger, style, transition, animate } from '@angular/animations';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-notification-center',
   standalone: true,
+  imports: [
+    CommonModule,
+    MatIconModule
+  ],
   templateUrl: './notification-center.component.html',
   styleUrls: ['./notification-center.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

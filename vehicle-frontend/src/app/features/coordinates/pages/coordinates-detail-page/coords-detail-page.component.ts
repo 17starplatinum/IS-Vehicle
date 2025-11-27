@@ -8,15 +8,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { CoordsFormDialogComponent } from '../../components/forms/coordinates-form-dialog.component';
 import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 import { CoordinatesDetailComponent } from '../../components/details/coords-detail.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-coords-detail-page',
   standalone: true,
   imports: [
+    CommonModule,
     CoordinatesDetailComponent,
     SharedMaterialModule
   ],
   templateUrl: './coords-detail-page.component.html',
+  styleUrls: ['./coords-detail-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoordinatesDetailPageComponent implements OnInit, OnDestroy {

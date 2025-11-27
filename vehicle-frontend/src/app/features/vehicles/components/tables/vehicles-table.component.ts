@@ -118,7 +118,7 @@ export class VehiclesTableComponent implements OnInit {
 
     sortFunction(column: string) {
         if (this.sortBy === column) {
-            this.ascending = this.ascending;
+            this.ascending = !this.ascending;
         } else {
             this.sortBy = column;
             this.ascending = true;
