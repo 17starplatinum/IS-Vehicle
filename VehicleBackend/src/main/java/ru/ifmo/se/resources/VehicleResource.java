@@ -6,7 +6,9 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import ru.ifmo.se.dto.requests.VehicleRequest;
+import ru.ifmo.se.dto.responses.MapResponse;
 import ru.ifmo.se.dto.responses.PageResponse;
+import ru.ifmo.se.dto.responses.SimpleResponse;
 import ru.ifmo.se.dto.responses.VehicleResponse;
 import ru.ifmo.se.entities.FuelType;
 import ru.ifmo.se.services.api.VehicleService;
@@ -31,13 +33,20 @@ public class VehicleResource {
     public Response getVehicles(@QueryParam("page") @DefaultValue("1") int page,
                                 @QueryParam("size") @DefaultValue("10") int size,
                                 @QueryParam("sortBy") @DefaultValue("id") String sortBy,
-                                @QueryParam("ascending") @DefaultValue("true") boolean ascending) {
+                                @QueryParam("ascending") @DefaultValue("true") boolean ascending,
+                                @QueryParam("fuelType") @ValidEnum(enumClass = FuelType.class) String fuelType,
+                                @QueryParam("min") Double min, @QueryParam("max") Double max,
+                                @QueryParam("filter") @DefaultValue("") String filter) {
         if (vehicleValidator.isValidSortField(sortBy)) {
             String validFieldsString = String.join(", ", VehicleValidator.getValidFields());
             throw new IllegalArgumentException("Sorting field is not valid. Must be one of: " + validFieldsString);
         }
+        if (min != null && max != null) {
+            vehicleValidator.validateRange(min, max);
+        }
+        Boolean enginePowerRangeEnabled = min != null && max != null;
         ascending = vehicleValidator.validateGetParameters(page, size, ascending);
-        PageResponse<VehicleResponse> vehicles = vehicleService.getVehicles(page, size, sortBy, ascending);
+        PageResponse<VehicleResponse> vehicles = vehicleService.getVehicles(page, size, sortBy, ascending, fuelType, enginePowerRangeEnabled, min, max, filter);
         return Response.ok(vehicles, MediaType.APPLICATION_JSON).build();
     }
 
@@ -77,29 +86,13 @@ public class VehicleResource {
     @GET
     @Path("/special/total-fuel-consumption")
     public Response getTotalFuelConsumption() {
-        return Response.ok(vehicleService.calculateFuelConsumptionSum()).build();
+        return Response.ok(new SimpleResponse<>(vehicleService.calculateFuelConsumptionSum())).build();
     }
 
     @GET
     @Path("/special/group-by-fuel-consumption")
     public Response getGroupByFuelConsumption() {
-        return Response.ok(vehicleService.groupVehiclesByFuelConsumption()).build();
-    }
-
-    @GET
-    @Path("/special/fuel-type-less")
-    public Response getFuelTypeLess(
-            @ValidEnum(enumClass = FuelType.class,
-                    message = "Invalid fuel type. Must be one of: ${validValues}")
-            @QueryParam("fuelType") String fuelType) {
-        return Response.ok(vehicleService.findByFuelTypeLessThan(fuelType)).build();
-    }
-
-    @GET
-    @Path("/special/power-range")
-    public Response getPowerRange(@QueryParam("min") Double min, @QueryParam("max") Double max) {
-        vehicleValidator.validateRange(min, max);
-        return Response.ok(vehicleService.findByEnginePowerRange(min, max)).build();
+        return Response.ok(new MapResponse<>(vehicleService.groupVehiclesByFuelConsumption())).build();
     }
 
     @PATCH

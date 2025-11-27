@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.util.Date;
 
 @Entity
-@Table
+@Table(name = "vehicles")
 @Getter
 @Setter
 @Builder
@@ -22,7 +22,7 @@ public class Vehicle {
     @NotBlank(message = "Поле 'name' не может быть null и пустым")
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "coordinates_id", nullable = false, referencedColumnName = "id")
     private Coordinates coordinates;
 
@@ -33,6 +33,7 @@ public class Vehicle {
     private java.util.Date creationDate = Date.from(Instant.now());
 
     @NotNull(message = "Поле 'type' не может быть null")
+    @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
     private VehicleType type;
 

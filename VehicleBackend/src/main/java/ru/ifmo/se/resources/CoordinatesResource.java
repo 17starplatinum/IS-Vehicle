@@ -9,8 +9,7 @@ import ru.ifmo.se.dto.requests.CoordinatesRequest;
 import ru.ifmo.se.dto.responses.CoordinatesResponse;
 import ru.ifmo.se.dto.responses.PageResponse;
 import ru.ifmo.se.services.api.CoordinatesService;
-import ru.ifmo.se.validation.CoordinatesValidator;
-import ru.ifmo.se.validation.VehicleValidator;
+import ru.ifmo.se.validation.coordinates.CoordinatesValidator;
 import ru.ifmo.se.websocket.VehicleWebSocket;
 
 
@@ -32,7 +31,7 @@ public class CoordinatesResource {
                                 @QueryParam("sortBy") @DefaultValue("id") String sortBy,
                                 @QueryParam("ascending") @DefaultValue("true") boolean ascending) {
         if (coordinatesValidator.isValidSortField(sortBy)) {
-            String validFieldsString = String.join(", ", VehicleValidator.getValidFields());
+            String validFieldsString = String.join(", ", CoordinatesValidator.getValidFields());
             throw new IllegalArgumentException("Sorting field is not valid. Must be one of: " + validFieldsString);
         }
         ascending = coordinatesValidator.validateGetParameters(page, size, ascending);

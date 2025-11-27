@@ -6,12 +6,13 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION group_by_fuel_consumption()
-    RETURNS TABLE(
-        fuel_consumption BIGINT, count BIGINT
-                 ) AS $$
+    RETURNS TABLE(fuel_consumption BIGINT, count BIGINT) AS $$
+
 BEGIN
     RETURN QUERY
-        SELECT v.fuel_consumption, COUNT(*)::BIGINT AS count
+        SELECT
+            COALESCE(v.fuel_consumption, 0)::BIGINT AS fuel_consumption,
+            COUNT(*)::BIGINT AS count
         FROM vehicles v
         GROUP BY v.fuel_consumption
         ORDER BY v.fuel_consumption;
@@ -19,40 +20,14 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION find_by_fuel_type_less_than(target_fuel_type TEXT)
-    RETURNS TABLE(
-                     id BIGINT,
-                     name TEXT,
-                     creation_date TIMESTAMP,
-                     coordinates_id BIGINT,
-                     coordinates_x BIGINT,
-                     coordinates_y DOUBLE PRECISION,
-                     vehicle_type TEXT,
-                     engine_power DOUBLE PRECISION,
-                     number_of_wheels INTEGER,
-                     capacity INTEGER,
-                     distance_travelled DOUBLE PRECISION,
-                     fuel_consumption BIGINT,
-                     fuel_type TEXT
-                 ) AS $$
+    RETURNS TABLE(id BIGINT) AS $$
 BEGIN
     RETURN QUERY
         SELECT
-            v.id,
-            v.name,
-            v.creation_date,
-            c.id AS coordinates_id,
-            c.x AS coordinates_x,
-            c.y AS coordinates_y,
-            v.type::TEXT AS vehicle_type,
-            v.engine_power,
-            v.number_of_wheels,
-            v.capacity,
-            v.distance_travelled,
-            v.fuel_consumption,
-            v.fuel_type::TEXT
+            v.id
         FROM vehicles v
                  JOIN coordinates c ON v.coordinates_id = c.id
-        WHERE v.fuel_type::TEXT < LOWER(target_fuel_type)
+        WHERE v.fuel_type::fuel_type < target_fuel_type::fuel_type
         ORDER BY v.fuel_type, v.name;
 END;
 $$ LANGUAGE plpgsql;
@@ -61,44 +36,18 @@ CREATE OR REPLACE FUNCTION find_by_engine_power_range(
     range_min DOUBLE PRECISION,
     range_max DOUBLE PRECISION
 )
-    RETURNS TABLE(
-                     id BIGINT,
-                     name TEXT,
-                     creation_date TIMESTAMP,
-                     coordinates_id BIGINT,
-                     coordinates_x BIGINT,
-                     coordinates_y DOUBLE PRECISION,
-                     vehicle_type TEXT,
-                     engine_power DOUBLE PRECISION,
-                     number_of_wheels INTEGER,
-                     capacity INTEGER,
-                     distance_travelled DOUBLE PRECISION,
-                     fuel_consumption BIGINT,
-                     fuel_type TEXT
-                 ) AS $$
+    RETURNS TABLE(id BIGINT) AS $$
 BEGIN
     IF range_min IS NULL OR range_max IS NULL THEN
         RAISE EXCEPTION 'Range boundaries cannot be null';
     END IF;
-    IF range_min > range_max THEN
+    IF range_min >= range_max THEN
         RAISE EXCEPTION 'Min range value cannot be greater than max range value';
     END IF;
 
     RETURN QUERY
         SELECT
-            v.id,
-            v.name,
-            v.creation_date,
-            c.id AS coordinates_id,
-            c.x AS coordinates_x,
-            c.y AS coordinates_y,
-            v.type::TEXT AS vehicle_type,
-            v.engine_power,
-            v.number_of_wheels,
-            v.capacity,
-            v.distance_travelled,
-            v.fuel_consumption,
-            v.fuel_type::TEXT
+            v.id
         FROM vehicles v
                  JOIN coordinates c ON v.coordinates_id = c.id
         WHERE

@@ -90,7 +90,6 @@
                     </annotationProcessorPaths>
                     <compilerArgs>
                         <arg>-Amapstruct.defaultComponentModel=cdi</arg>
-                        <arg>-Alombok.mapstruct.binding=true</arg>
                         <arg>-Amapstruct.unmappedTargetPolicy=ERROR</arg>
                     </compilerArgs>
                 </configuration>

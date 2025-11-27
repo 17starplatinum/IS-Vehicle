@@ -31,7 +31,6 @@ public class CoordinatesServiceImpl implements CoordinatesService {
 
     @Override
     public CoordinatesResponse getCoordinatesById(Long id) {
-
         Coordinates coordinates = coordinatesRepository.getCoordinatesById(id)
                 .orElseThrow(() -> new NotFoundException("Coordinates with id " + id + " not found."));
         return coordinatesMapper.toResponse(coordinates);
@@ -49,6 +48,8 @@ public class CoordinatesServiceImpl implements CoordinatesService {
         coordinates.setId(id);
         return coordinatesMapper.toResponse(coordinatesRepository.updateCoordinates(coordinates));
     }
+
+
 
     @Override
     public void deleteCoordinatesById(Long id) {

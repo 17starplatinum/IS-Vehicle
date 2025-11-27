@@ -2,20 +2,22 @@ package ru.ifmo.se.services.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import ru.ifmo.se.dto.requests.CoordinatesRequest;
 import ru.ifmo.se.dto.requests.VehicleRequest;
-import ru.ifmo.se.dto.responses.DatabaseFunctionResult;
 import ru.ifmo.se.dto.responses.PageResponse;
 import ru.ifmo.se.dto.responses.VehicleResponse;
-import ru.ifmo.se.entities.FuelType;
+import ru.ifmo.se.entities.Coordinates;
 import ru.ifmo.se.entities.Vehicle;
 import ru.ifmo.se.exceptions.NotFoundException;
+import ru.ifmo.se.mappers.CoordinatesMapper;
 import ru.ifmo.se.mappers.VehicleMapper;
+import ru.ifmo.se.repositories.api.CoordinatesRepository;
 import ru.ifmo.se.repositories.api.VehicleRepository;
 import ru.ifmo.se.services.api.VehicleService;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @ApplicationScoped
 public class VehicleServiceImpl implements VehicleService {
@@ -26,9 +28,15 @@ public class VehicleServiceImpl implements VehicleService {
     @Inject
     private VehicleMapper vehicleMapper;
 
+    @Inject
+    private CoordinatesRepository coordinatesRepository;
+
+    @Inject
+    private CoordinatesMapper coordinatesMapper;
+
     @Override
-    public PageResponse<VehicleResponse> getVehicles(Integer page, Integer size, String sortBy, Boolean ascending) {
-        List<Vehicle> vehicleList = vehicleRepository.getVehicles(page, size, sortBy, ascending);
+    public PageResponse<VehicleResponse> getVehicles(Integer page, Integer size, String sortBy, Boolean ascending, String fuelType, Boolean enginePowerRange, Double min, Double max, String filter) {
+        List<Vehicle> vehicleList = vehicleRepository.getVehicles(page, size, sortBy, ascending, fuelType, enginePowerRange, min, max, filter);
         long total = vehicleRepository.countAllEntities();
         return new PageResponse<>(vehicleMapper.toResponseList(vehicleList), page, size, total);
     }
@@ -41,15 +49,40 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public VehicleResponse saveVehicle(VehicleRequest request) {
-        return vehicleMapper.toResponse(vehicleRepository.saveVehicle(vehicleMapper.fromRequest(request)));
+        Coordinates coordinates;
+        if (request.getCoordinates().getId() == null) {
+            coordinates = coordinatesRepository.saveCoordinates(
+                    coordinatesMapper.fromRequest(request.getCoordinates())
+            );
+        } else {
+            coordinates = coordinatesRepository.getCoordinatesById(request.getCoordinates().getId())
+                    .orElseThrow(() -> new NotFoundException("Coordinates with id " + request.getCoordinates().getId() + " not found"));
+        }
+        Vehicle vehicle = vehicleMapper.fromRequest(request);
+        vehicle.setCoordinates(coordinates);
+        Vehicle savedVehicle = vehicleRepository.saveVehicle(vehicle);
+        return vehicleMapper.toResponse(savedVehicle);
     }
 
     @Override
+    @Transactional(Transactional.TxType.REQUIRED)
     public VehicleResponse updateVehicle(Long id, VehicleRequest request) {
-        Vehicle vehicle = vehicleMapper.fromRequest(request);
-        vehicle.setId(id);
-        return vehicleMapper.toResponse(vehicleRepository.updateVehicle(vehicle));
+        vehicleRepository.getVehicleById(id).orElseThrow(() -> new NotFoundException("Vehicle with id " + id + " not found."));
+        CoordinatesRequest coordinatesRequest = request.getCoordinates();
+        Long coordinatesId = coordinatesRequest.getId();
+        if (coordinatesId == null) {
+            Coordinates coordinates = coordinatesRepository.saveCoordinates(coordinatesMapper.fromRequest(coordinatesRequest));
+            Vehicle updatedVehicle = vehicleMapper.toEntity(request, coordinates);
+            updatedVehicle = vehicleRepository.updateVehicle(updatedVehicle);
+            return vehicleMapper.toResponse(updatedVehicle);
+        }
+        Coordinates coordinates = coordinatesRepository.getCoordinatesById(coordinatesId)
+                        .orElseThrow(() -> new NotFoundException("Coordinates with id " + coordinatesId + "not found"));
+        Vehicle updatedVehicle = vehicleMapper.toEntity(request, coordinates);
+        updatedVehicle = vehicleRepository.updateVehicle(updatedVehicle);
+        return vehicleMapper.toResponse(updatedVehicle);
     }
 
     @Override
@@ -65,25 +98,6 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Map<Long, Long> groupVehiclesByFuelConsumption() {
         return vehicleRepository.groupVehiclesByFuelConsumption();
-    }
-
-    @Override
-    public List<VehicleResponse> findByFuelTypeLessThan(String fuelType) {
-        List<DatabaseFunctionResult> results = vehicleRepository.findByFuelTypeLessThan(FuelType.fromValue(fuelType));
-
-        return results.stream()
-                .map(vehicleMapper::toResponseFromFunctionResult)
-                .filter(Objects::nonNull)
-                .toList();
-    }
-
-    @Override
-    public List<VehicleResponse> findByEnginePowerRange(Double min, Double max) {
-        List<DatabaseFunctionResult> results = vehicleRepository.findByEnginePowerRange(min, max);
-        return results.stream()
-                .map(vehicleMapper::toResponseFromFunctionResult)
-                .filter(Objects::nonNull)
-                .toList();
     }
 
     @Override

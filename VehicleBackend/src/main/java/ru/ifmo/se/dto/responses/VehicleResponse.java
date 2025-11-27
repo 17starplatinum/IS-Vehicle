@@ -1,10 +1,7 @@
 package ru.ifmo.se.dto.responses;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,7 +31,7 @@ public class VehicleResponse {
     private int numberOfWheels;
     @Positive
     private int capacity;
-    @Positive
+    @PositiveOrZero
     private double distanceTravelled;
     @Positive
     private long fuelConsumption;

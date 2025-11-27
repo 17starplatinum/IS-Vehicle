@@ -1,10 +1,7 @@
 package ru.ifmo.se.repositories.impl;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -23,7 +20,7 @@ public class CoordinatesRepositoryImpl implements CoordinatesRepository {
 
     private static final Logger log = LoggerFactory.getLogger(CoordinatesRepositoryImpl.class);
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "vehiclePU")
     private EntityManager em;
 
     @Override
@@ -57,14 +54,10 @@ public class CoordinatesRepositoryImpl implements CoordinatesRepository {
     @Override
     @Transactional
     public Coordinates saveCoordinates(Coordinates coordinates) {
-        log.debug("Saving coordinates: {}", coordinates.toString());
-        if (coordinates.getId() == null) {
-            em.persist(coordinates);
-            log.debug("Saved coordinates (persisted): {}", coordinates);
-            return coordinates;
-        }
-        log.debug("Saved coordinates (merged): {}", coordinates);
-        return em.merge(coordinates);
+        log.debug("Saving coordinates: {}...", coordinates.toString());
+        em.persist(coordinates);
+        em.flush();
+        return coordinates;
     }
 
     @Override
@@ -83,6 +76,7 @@ public class CoordinatesRepositoryImpl implements CoordinatesRepository {
     }
 
     @Override
+    @Transactional
     public void deleteCoordinatesById(long id) {
         log.debug("Deleting coordinates with id: {}", id);
         Optional<Coordinates> coordinates = getCoordinatesById(id);
