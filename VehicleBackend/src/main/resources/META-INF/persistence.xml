@@ -15,9 +15,6 @@
             <property name="hibernate.jdbc.time_zone" value="UTC"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.use_sql_comments" value="true"/>
             <property name="hibernate.flush.mode" value="COMMIT"/>
             <property name="hibernate.default_schema" value="public"/>
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.JBossStandAloneJtaPlatform"/>
