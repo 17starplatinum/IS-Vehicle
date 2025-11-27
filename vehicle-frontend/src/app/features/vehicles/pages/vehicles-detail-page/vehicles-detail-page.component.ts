@@ -6,10 +6,16 @@ import { Vehicle } from '../../store/models/vehicles.models';
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { VehicleFormDialogComponent } from '../../components/forms/vehicle-form-dialog.component';
+import { VehicleDetailComponent } from '../../components/details/vehicle-detail.component';
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
   selector: 'app-vehicle-detail-page',
-  standalone: false,
+  standalone: true,
+  imports: [
+    SharedMaterialModule,
+    VehicleDetailComponent
+  ],
   templateUrl: './vehicles-detail-page.component.html',
   styleUrls: ['./vehicles-detail-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

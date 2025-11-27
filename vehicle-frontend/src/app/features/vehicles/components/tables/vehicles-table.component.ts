@@ -16,10 +16,14 @@ import {
     selectVehiclesPageSize, 
     selectVehiclesLoading 
 } from '../../store/selectors/vehicles.selector'
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
     selector: 'app-vehicles-table',
-    standalone: false,
+    standalone: true,
+    imports: [
+        SharedMaterialModule
+    ],
     templateUrl: './vehicles-table.component.html',
     styleUrls: ['./vehicles-table.component.scss']
 })

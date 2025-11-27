@@ -8,10 +8,14 @@ import { selectVehicleById, selectVehiclesLoading, selectVehiclesError } from '.
 import { Vehicle } from '../../store/models/vehicles.models';
 import { MatDialog } from '@angular/material/dialog';
 import { VehicleFormDialogComponent } from '../forms/vehicle-form-dialog.component';
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
   selector: 'app-vehicle-detail',
-  standalone: false,
+  standalone: true,
+  imports: [
+    SharedMaterialModule
+  ],
   templateUrl: './vehicle-detail.component.html',
   styleUrls: ['./vehicle-detail.component.scss']
 })

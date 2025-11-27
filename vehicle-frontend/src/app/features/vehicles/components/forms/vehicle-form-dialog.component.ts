@@ -10,10 +10,14 @@ import * as VehiclesActions from '../../store/actions/vehicles.actions';
 import * as CoordActions from '../../../coordinates/store/actions/coords.actions';
 import { selectCoordinatesList } from '../../../coordinates/store/selectors/coords.selector';
 import { CreateVehicleRequest, CreateCoordinatesRequest } from '../../store/models/vehicles.models';
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
   selector: 'app-vehicle-form-dialog',
-  standalone: false,
+  standalone: true,
+  imports: [
+    SharedMaterialModule
+  ],
   templateUrl: './vehicle-form-dialog.component.html',
   styleUrls: ['./vehicle-form-dialog.component.scss']
 })

@@ -14,10 +14,14 @@ import {
     selectCoordinatesPageSize, 
     selectCoordinatesLoading 
 } from '../../store/selectors/coords.selector';
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
     selector: 'app-coords-table',
-    standalone: false,
+    standalone: true,
+    imports: [
+      SharedMaterialModule
+    ],
     templateUrl: './coords-table.component.html',
     styleUrls: ['./coords-table.component.scss']
 })

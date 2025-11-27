@@ -1,7 +1,7 @@
 
 
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '../common/common.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ContentTypeInterceptor } from './interceptors/content-type.interceptor';

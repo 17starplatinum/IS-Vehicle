@@ -8,10 +8,14 @@ import {
   selectSpecialOpsError,
   selectSpecialOpsCurrentOp
 } from '../../store/selectors/special-ops.selector';
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
   selector: 'app-special-ops-panel',
-  standalone: false,
+  standalone: true,
+  imports: [
+    SharedMaterialModule
+  ],
   templateUrl: './special-ops-panel.component.html',
   styleUrls: ['./special-ops-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

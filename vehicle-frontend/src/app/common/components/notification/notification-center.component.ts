@@ -6,7 +6,7 @@ import { trigger, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-notification-center',
-  standalone: false,
+  standalone: true,
   templateUrl: './notification-center.component.html',
   styleUrls: ['./notification-center.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

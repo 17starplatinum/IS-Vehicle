@@ -5,10 +5,14 @@ import * as CoordsActions from '../../store/actions/coords.actions'
 import { CreateCoordinatesRequest } from '../../store/models/coords.models';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
   selector: 'app-coords-form-dialog',
-  standalone: false,
+  standalone: true,
+  imports: [
+    SharedMaterialModule
+  ],
   templateUrl: './coordinates-form-dialog.component.html',
   styleUrls: ['./coordinates-form-dialog.component.scss']
 })

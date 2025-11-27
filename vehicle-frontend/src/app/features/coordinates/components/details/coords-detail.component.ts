@@ -7,10 +7,14 @@ import * as CoordsActions from '../../store/actions/coords.actions'
 import { selectCoordinatesById, selectCoordinatesLoading, selectCoordinatesError } from '../../store/selectors/coords.selector';
 import { Coordinates } from '../../store/models/coords.models';
 import { MatDialog } from '@angular/material/dialog';
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
   selector: 'app-coordinates-detail',
-  standalone: false,
+  standalone: true,
+  imports: [
+    SharedMaterialModule
+  ],
   templateUrl: './coords-detail.component.html',
   styleUrls: ['./coords-detail.component.scss']
 })

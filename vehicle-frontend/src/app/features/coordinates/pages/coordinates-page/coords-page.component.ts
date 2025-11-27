@@ -4,10 +4,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CoordsFormDialogComponent } from '../../components/forms/coordinates-form-dialog.component';
 import { Coordinates } from '../../store/models/coords.models';
+import { CoordinatesTableComponent } from '../../components/tables/coords-table.component';
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
   selector: 'app-coordinates-page',
-  standalone: false,
+  standalone: true,
+  imports: [
+    CoordinatesTableComponent,
+    SharedMaterialModule
+  ],
   templateUrl: './coords-page.component.html',
   styleUrls: ['./coords-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

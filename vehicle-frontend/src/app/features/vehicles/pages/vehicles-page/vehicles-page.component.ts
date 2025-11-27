@@ -13,10 +13,18 @@ import {
 } from '../../store/selectors/special-ops.selector';
 import * as VehicleActions from '../../store/actions/vehicles.actions';
 import { Store } from '@ngrx/store';
+import { SpecialOpsPanelComponent } from '../../components/special-ops-panel/special-ops-panel.component';
+import { VehiclesTableComponent } from "../../components/tables/vehicles-table.component";
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
 
 @Component({
   selector: 'app-vehicles-page',
-  standalone: false,
+  standalone: true,
+  imports: [
+    SpecialOpsPanelComponent,
+    SharedMaterialModule,
+    VehiclesTableComponent
+],
   templateUrl: './vehicles-page.component.html',
   styleUrls: ['./vehicles-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

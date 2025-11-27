@@ -6,10 +6,16 @@ import { Coordinates } from '../../store/models/coords.models';
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CoordsFormDialogComponent } from '../../components/forms/coordinates-form-dialog.component';
+import { SharedMaterialModule } from '../../../../common/shared-material/shared-material.module';
+import { CoordinatesDetailComponent } from '../../components/details/coords-detail.component';
 
 @Component({
   selector: 'app-coords-detail-page',
-  standalone: false,
+  standalone: true,
+  imports: [
+    CoordinatesDetailComponent,
+    SharedMaterialModule
+  ],
   templateUrl: './coords-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

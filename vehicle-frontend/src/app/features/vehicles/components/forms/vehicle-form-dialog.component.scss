@@ -1,45 +1,46 @@
-@use '../../../../../styles/index' as *;
-
+@use '../../../../../styles/variables' as vars;
+@use '../../../../../styles/mixins' as mix;
+@use '../../../../../styles/utils' as utils;
 :host {
   display: block;
   width: 100%;
   max-width: 1080px;
   box-sizing: border-box;
-  color: $color-text;
+  color: vars.$color-text;
 }
 
 .vehicle-form-dialog {
-  @include card;
-  padding: $space-lg;
+  @include mix.card;
+  padding: vars.$space-lg;
   display: flex;
   flex-direction: column;
-  gap: $space-lg;
+  gap: vars.$space-lg;
 }
 
 .header {
-  @include flex-between;
-  gap: $space-md;
+  @include mix.flex-between;
+  gap: vars.$space-md;
 
   h2 {
     margin: 0;
-    font-size: $fs-lg;
+    font-size: vars.$fs-lg;
     font-weight: 700;
-    color: $color-gold;
+    color: vars.$color-gold;
   }
 
   .meta {
-    font-size: $fs-sm;
-    color: $color-text-muted;
+    font-size: vars.$fs-sm;
+    color: vars.$color-text-muted;
   }
 }
 
 .form {
   display: grid;
   grid-template-columns: 1fr 300px;
-  gap: $space-lg;
+  gap: vars.$space-lg;
   align-items: start;
 
-  @include mobile {
+  @include mix.mobile {
     grid-template-columns: 1fr;
   }
 }
@@ -47,37 +48,37 @@
 .form-main {
   display: flex;
   flex-direction: column;
-  gap: $space-md;
+  gap: vars.$space-md;
 }
 
 .form-side {
   display: flex;
   flex-direction: column;
-  gap: $space-md;
+  gap: vars.$space-md;
 
   .coords-chooser {
-    @include card;
-    padding: $space-md;
+    @include mix.card;
+    padding: vars.$space-md;
     display: flex;
     flex-direction: column;
-    gap: $space-sm;
+    gap: vars.$space-sm;
   }
 
   .coords-preview {
-    @include card;
-    padding: $space-md;
-    font-size: $fs-sm;
-    color: $color-text-muted;
-    background: $color-bg-tertiary;
+    @include mix.card;
+    padding: vars.$space-md;
+    font-size: vars.$fs-sm;
+    color: vars.$color-text-muted;
+    background: vars.$color-bg-tertiary;
   }
 }
 
 .row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: $space-md;
+  gap: vars.$space-md;
 
-  @include mobile {
+  @include mix.mobile {
     grid-template-columns: 1fr;
   }
 }
@@ -85,86 +86,86 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: $space-xs;
+  gap: vars.$space-xs;
 
   label {
-    font-size: $fs-sm;
-    color: $color-text-muted;
+    font-size: vars.$fs-sm;
+    color: vars.$color-text-muted;
     font-weight: 600;
     letter-spacing: 0.02em;
   }
 
   .control {
-    @include input-base();
-    height: $form-control-height;
+    @include mix.input-base();
+    height: vars.$form-control-height;
     display: flex;
     align-items: center;
-    padding: 0 $space-sm;
+    padding: 0 vars.$space-sm;
     box-sizing: border-box;
     width: 100%;
 
     &.select {
-      background: $color-bg-tertiary;
-      border-radius: $radius-sm;
+      background: vars.$color-bg-tertiary;
+      border-radius: vars.$radius-sm;
     }
 
     &.has-error {
-      border-color: rgba($color-danger, 0.28);
-      box-shadow: 0 0 0 3px rgba($color-danger, 0.06);
+      border-color: rgba(vars.$color-danger, 0.28);
+      box-shadow: 0 0 0 3px rgba(vars.$color-danger, 0.06);
     }
 
     input, textarea, select {
       border: none;
       background: transparent;
-      color: $color-text;
+      color: vars.$color-text;
       width: 100%;
-      font-size: $fs-base;
+      font-size: vars.$fs-base;
       outline: none;
     }
   }
 
   .hint {
-    font-size: $fs-sm;
-    color: $color-text-muted;
+    font-size: vars.$fs-sm;
+    color: vars.$color-text-muted;
   }
 
   .error {
-    font-size: $fs-sm;
-    color: $color-danger;
+    font-size: vars.$fs-sm;
+    color: vars.$color-danger;
     margin-top: 4px;
   }
 }
 
 .coords-mode {
   display: flex;
-  gap: $space-sm;
+  gap: vars.$space-sm;
   align-items: center;
 
   .mode-btn {
     padding: 6px 10px;
-    border-radius: $radius-sm;
-    border: 1px solid $color-border;
+    border-radius: vars.$radius-sm;
+    border: 1px solid vars.$color-border;
     background: transparent;
-    color: $color-text;
+    color: vars.$color-text;
     font-weight: 600;
     cursor: pointer;
 
     &.active {
-      background: linear-gradient(180deg, rgba($color-gold, 0.12), transparent);
-      border-color: rgba($color-gold, 0.28);
-      color: $color-gold;
+      background: linear-gradient(180deg, rgba(vars.$color-gold, 0.12), transparent);
+      border-color: rgba(vars.$color-gold, 0.28);
+      color: vars.$color-gold;
     }
 
-    &:hover { @include transition(background, border-color, transform); transform: translateY(-1px); }
+    &:hover { @include mix.transition(background, border-color, transform); transform: translateY(-1px); }
   }
 }
 
 .existing-list {
   max-height: 240px;
   overflow: auto;
-  border: 1px solid $color-border;
-  border-radius: $radius-sm;
-  background: $color-bg-tertiary;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-sm;
+  background: vars.$color-bg-tertiary;
 
   ul {
     list-style: none;
@@ -177,11 +178,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: $fs-sm;
-      color: $color-text;
+      font-size: vars.$fs-sm;
+      color: vars.$color-text;
 
-      &:hover { background: $color-bg-hover; }
-      &.selected { background: linear-gradient(90deg, rgba($color-gold,0.06), transparent); border-left: 4px solid rgba($color-gold,0.12); }
+      &:hover { background: vars.$color-bg-hover; }
+      &.selected { background: linear-gradient(90deg, rgba(vars.$color-gold,0.06), transparent); border-left: 4px solid rgba(vars.$color-gold,0.12); }
     }
   }
 }
@@ -189,31 +190,31 @@
 .new-coords {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: $space-sm;
+  gap: vars.$space-sm;
 
   .field { margin: 0; }
 }
 
 .actions {
   display: flex;
-  gap: $space-sm;
+  gap: vars.$space-sm;
   justify-content: flex-end;
-  margin-top: $space-md;
+  margin-top: vars.$space-md;
 
   button {
     padding: 8px 14px;
-    border-radius: $radius-sm;
-    border: 1px solid $color-border;
-    background: $color-bg-secondary;
-    color: $color-text;
+    border-radius: vars.$radius-sm;
+    border: 1px solid vars.$color-border;
+    background: vars.$color-bg-secondary;
+    color: vars.$color-text;
     font-weight: 700;
     cursor: pointer;
-    @include transition(background, transform, border-color);
+    @include mix.transition(background, transform, border-color);
 
     &.primary {
-      background: linear-gradient(180deg, rgba($color-gold,0.14), rgba($color-gold,0.06));
-      border-color: rgba($color-gold, 0.28);
-      color: $color-text;
+      background: linear-gradient(180deg, rgba(vars.$color-gold,0.14), rgba(vars.$color-gold,0.06));
+      border-color: rgba(vars.$color-gold, 0.28);
+      color: vars.$color-text;
     }
 
     &:disabled {
@@ -227,22 +228,22 @@
 }
 
 .form-errors {
-  background: rgba($color-danger, 0.06);
-  border: 1px solid rgba($color-danger, 0.14);
-  color: $color-danger;
-  padding: $space-sm;
-  border-radius: $radius-sm;
-  font-size: $fs-sm;
+  background: rgba(vars.$color-danger, 0.06);
+  border: 1px solid rgba(vars.$color-danger, 0.14);
+  color: vars.$color-danger;
+  padding: vars.$space-sm;
+  border-radius: vars.$radius-sm;
+  font-size: vars.$fs-sm;
 }
 
-.small-muted { font-size: $fs-sm; color: $color-text-muted; }
+.small-muted { font-size: vars.$fs-sm; color: vars.$color-text-muted; }
 
 :focus-visible {
-  outline: 3px solid rgba($color-gold, 0.14);
+  outline: 3px solid rgba(vars.$color-gold, 0.14);
   outline-offset: 2px;
 }
 
-@include mobile {
+@include mix.mobile {
   .form {
     grid-template-columns: 1fr;
   }
