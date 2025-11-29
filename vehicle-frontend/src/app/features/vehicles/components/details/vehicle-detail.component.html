@@ -1,0 +1,39 @@
+<div *ngIf="loading$ | async" class="loading">Загрузка...</div>
+<div *ngIf="(error$ | async) as err" class="error">Ошибка: {{ err?.message || err }}</div>
+
+<ng-container *ngIf="vehicle$ | async as vehicle; else noVehicle">
+  <h2>Транспорт #{{vehicle.id}} — {{vehicle.name}}</h2>
+
+  <div class="actions">
+    <button mat-flat-button color="primary" (click)="openEdit(vehicle)">Редактировать</button>
+    <button mat-flat-button color="warn" (click)="deleteVehicle(vehicle)">Удалить</button>
+  </div>
+
+  <mat-card>
+    <mat-card-content>
+      <p><strong>Название:</strong> {{ vehicle.name }}</p>
+      <p><strong>Тип:</strong> {{ vehicle.type }}</p>
+      <p><strong>Мощность двигателя:</strong> {{ vehicle.enginePower }}</p>
+      <p><strong>Число колёс:</strong> {{ vehicle.numberOfWheels }}</p>
+      <p><strong>Вместимость:</strong> {{ vehicle.capacity }}</p>
+      <p><strong>Пробег:</strong> {{ vehicle.distanceTravelled }}</p>
+      <p><strong>Расход топлива:</strong> {{ vehicle.fuelConsumption }}</p>
+      <p><strong>Топливо:</strong> {{ vehicle.fuelType }}</p>
+      <p><strong>Дата создания:</strong> {{ vehicle.creationDate | date:'medium' }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="mt-12">
+    <mat-card-title>Координаты</mat-card-title>
+    <mat-card-content *ngIf="vehicle.coordinates">
+      <p>ID: {{ vehicle.coordinates.id }}</p>
+      <p>X: {{ vehicle.coordinates.x }}</p>
+      <p>Y: {{ vehicle.coordinates.y }}</p>
+      <button mat-button [routerLink]="['/coordinates', vehicle.coordinates.id]">Открыть координаты</button>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+<ng-template #noVehicle>
+  <p>Транспорт не найден.</p>
+</ng-template>

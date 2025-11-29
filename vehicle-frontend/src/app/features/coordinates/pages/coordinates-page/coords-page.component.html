@@ -1,0 +1,17 @@
+<div class="page">
+  <div class="header">
+    <h1>Координаты</h1>
+    <button mat-flat-button color="primary" (click)="openCreateDialog()">Создать координат</button>
+  </div>
+
+  <app-coords-table
+    [coordinates$]="coordinates$"
+    [loading$]="loading$"
+    [page$]="page$"
+    [pageSize$]="pageSize$"
+    [total$]="total$"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (pageChange)="onPageChange($event)">
+  </app-coords-table>
+</div>

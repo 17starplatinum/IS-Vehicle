@@ -1,0 +1,58 @@
+<div class="special-ops-panel">
+  <h3>Special operations</h3>
+
+  <div class="op-row">
+    <button mat-flat-button color="primary" (click)="runSum()">Сумма топлив</button>
+    <button mat-flat-button (click)="runGroup()">Сгруппировать по топливу</button>
+  </div>
+
+  <div class="op-row">
+    <mat-form-field appearance="outline" class="small">
+      <mat-label>ID транспорта</mat-label>
+      <input matInput type="number" [(ngModel)]="resetId" />
+    </mat-form-field>
+    <button mat-flat-button color="warn" (click)="runResetDistance()">Скрутить расстояние до 0</button>
+  </div>
+
+  <div class="status">
+    <mat-progress-bar *ngIf="(loading$ | async)" mode="indeterminate"></mat-progress-bar>
+
+    <ng-container *ngIf="(error$ | async) as err">
+      <mat-card class="error">Ошибка: {{ err | json }}</mat-card>
+    </ng-container>
+
+    <ng-container *ngIf="(result$ | async) as res">
+      <mat-card class="result">
+        <h4>Результат операции ({{ (currentOp$ | async) || 'unknown' }})</h4>
+
+        <div *ngIf="isNumber(res?.message)">
+          <p>Сумма потребления топлив: {{ res.message }}</p>
+        </div>
+
+        <div *ngIf="isArray(res) && res.length && res[0].fuelConsumption !== undefined">
+          <table>
+            <thead>
+              <tr>
+                <th>Потребление топлив</th>
+                <th>Количество</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let g of res">
+                <td>{{ g.fuelConsumption }}</td>
+                <td>{{ g.count }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="res === null || res === undefined">
+          <p>Операция выполнена успешно.</p>
+        </div>
+      </mat-card>
+    </ng-container>
+  </div>
+
+  <div style="margin-top:8px;">
+    <button mat-button (click)="clear()">Очистить</button>
+  </div>
+</div>

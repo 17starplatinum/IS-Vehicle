@@ -1,0 +1,148 @@
+@use '../../../../../styles/variables' as *;
+@use '../../../../../styles/mixins' as *;
+@use '../../../../../styles/utils' as *;
+
+:host {
+  display: block;
+  padding: $space-lg;
+  box-sizing: border-box;
+  background: $color-bg-secondary;
+  color: $color-text;
+}
+
+.vehicles-detail-page {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  width: 100%;
+  padding: $space-md;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+
+  h1 {
+    margin: 0;
+    font-size: $fs-xl;
+    font-weight: 600;
+    color: $color-gold;
+  }
+
+  .actions {
+    display: flex;
+    gap: $space-sm;
+    align-items: center;
+
+    .btn {
+      padding: 8px 12px;
+      border-radius: $radius-sm;
+      border: 1px solid $color-border;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      color: $color-text;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: $fs-sm;
+      transition: background 0.14s ease, transform 0.12s ease;
+
+      &:hover {
+        background: $color-bg-hover;
+        transform: translateY(-1px);
+      }
+
+      &.danger {
+        border-color: rgba(red, 0.18);
+        color: $color-danger;
+      }
+    }
+  }
+}
+
+.detail-card {
+  @include card;
+  padding: $space-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  .meta-row {
+    display: flex;
+    gap: $space-lg;
+    flex-wrap: wrap;
+  }
+
+  .field {
+    flex: 1 1 320px;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+
+    label {
+      font-size: $fs-sm;
+      color: $color-text-muted;
+    }
+
+    .value {
+      font-size: $fs-lg;
+      color: $color-text;
+      font-weight: 500;
+    }
+  }
+
+  .related {
+    margin-top: $space-md;
+    width: 100%;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th, td {
+        padding: 10px 12px;
+        border-bottom: 1px solid $color-border;
+        text-align: left;
+        font-size: $fs-sm;
+        color: $color-text;
+      }
+
+      tbody tr {
+        @include table-row-hover;
+      }
+    }
+  }
+}
+
+.special-ops {
+  margin-top: $space-lg;
+
+  h2 {
+    margin: 0 0 $space-sm 0;
+    font-size: $fs-lg;
+    color: $color-silver;
+  }
+
+  app-special-ops-panel {
+    display: block;
+    width: 100%;
+  }
+}
+
+@media (max-width: $bp-md) {
+  .detail-card .meta-row {
+    flex-direction: column;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+
+    .actions {
+      justify-content: flex-end;
+    }
+  }
+}

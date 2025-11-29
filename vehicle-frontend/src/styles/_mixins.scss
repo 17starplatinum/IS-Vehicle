@@ -1,0 +1,214 @@
+@use 'variables' as vars;
+@use 'sass:color';
+
+@mixin carbon-fiber-bg() {
+  background-color: vars.$color-bg-primary;
+
+  @if vars.$enable-carbon-texture == true {
+    background-image:
+      linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+      linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%);
+    background-size: 8px 8px;
+    background-blend-mode: overlay;
+  }
+}
+
+@mixin card() {
+  background: vars.$color-bg-secondary;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-md;
+  box-shadow: vars.$shadow-card;
+  padding: vars.$space-lg;
+  color: vars.$color-text;
+}
+
+@mixin icon-button($size: 36px) {
+  width: $size;
+  height: $size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid vars.$color-border-weak;
+  background: vars.$color-bg-secondary;
+  transition: background 0.15s ease, border 0.15s ease;
+
+  &:hover {
+    background: vars.$color-bg-hover;
+    border-color: vars.$color-border;
+  }
+}
+
+@mixin accent-underline($color: vars.$color-accent-primary) {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 48px;
+    height: 3px;
+    background: $color;
+    border-radius: vars.$radius-sm;
+  }
+}
+
+@mixin truncate($lines: 1) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin shadow-sm {
+  box-shadow: 0 1px 3px rgba(vars.$shadow-rgb, 0.15);
+}
+
+@mixin shadow-md {
+  box-shadow: 0 2px 6px rgba(vars.$shadow-rgb, 0.2);
+}
+
+@mixin shadow-lg {
+  box-shadow: 0 4px 12px rgba(vars.$shadow-rgb, 0.25);
+}
+
+@mixin btn-primary {
+  background-color: vars.$color-gold;
+  color: vars.$color-bg-primary;
+  font-weight: 500;
+  font-size: vars.$fs-base;
+  border-radius: vars.$radius-sm;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  @include transition(background-color, transform);
+
+  &:hover {
+    background-color: vars.$color-primary-hover;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background-color: vars.$color-disabled-bg;
+    color: vars.$color-disabled-text;
+    cursor: not-allowed;
+  }
+}
+
+@mixin btn-warn {
+  background-color: vars.$color-danger;
+  color: vars.$color-bg-primary;
+  font-weight: 500;
+  font-size: vars.$fs-base;
+  border-radius: vars.$radius-sm;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  @include transition(background-color, transform);
+
+  &:hover {
+    background-color: color.scale(vars.$color-danger, $lightness: -10%);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background-color: vars.$color-disabled-bg;
+    color: vars.$color-disabled-text;
+    cursor: not-allowed;
+  }
+}
+
+@mixin btn-outline {
+  background-color: transparent;
+  color: vars.$color-gold;
+  font-weight: 500;
+  font-size: vars.$fs-base;
+  border-radius: vars.$radius-sm;
+  padding: 0.5rem 1rem;
+  border: 2px solid vars.$color-gold;
+  cursor: pointer;
+  @include transition(background-color, color, transform);
+
+  &:hover {
+    background-color: vars.$color-gold;
+    color: vars.$color-bg-primary;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    border-color: vars.$color-disabled-bg;
+    color: vars.$color-disabled-text;
+    cursor: not-allowed;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: vars.$bp-sm) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: vars.$bp-md) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: vars.$bp-lg) {
+    @content;
+  }
+}
+
+@mixin transition($props...) {
+  transition: $props 0.15s ease;
+}
+
+@mixin input-base() {
+  height: vars.$form-control-height;
+  padding: 0 vars.$space-sm;
+  border-radius: vars.$input-border-radius;
+  background: vars.$color-bg-tertiary;
+  border: 1px solid vars.$color-border;
+  color: vars.$color-text;
+  font-size: vars.$fs-base;
+
+  &:focus {
+    outline: none;
+    border-color: vars.$color-accent-primary;
+  }
+}
+
+@mixin table-row-hover() {
+  &:hover {
+    background: vars.$color-bg-hover;
+  }
+}

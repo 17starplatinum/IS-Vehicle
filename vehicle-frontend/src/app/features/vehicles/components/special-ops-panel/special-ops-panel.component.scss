@@ -1,0 +1,109 @@
+@use '../../../../../styles/variables' as vars;
+@use '../../../../../styles/mixins' as mixins;
+
+.special-ops-panel {
+  background: vars.$color-bg-elevated;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-lg;
+  padding: vars.$space-xl vars.$space-lg;
+
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-xl;
+
+  @include mixins.shadow-md;
+
+  h3 {
+    margin: 0;
+    color: vars.$color-text-primary;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding-bottom: vars.$space-md;
+    border-bottom: 1px solid vars.$color-border;
+  }
+
+  .op-row {
+    display: flex;
+    align-items: center;
+    gap: vars.$space-lg;
+
+    .small {
+      width: 180px;
+      min-width: 160px;
+
+      mat-form-field {
+        width: 100%;
+      }
+    }
+
+    button[mat-flat-button] {
+      @include mixins.btn-primary;
+      padding: 0.6rem 1.3rem;
+      border-radius: vars.$radius-md;
+    }
+
+    button[color='warn'] {
+      @include mixins.btn-warn;
+    }
+  }
+
+  .status {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$space-md;
+
+    mat-card {
+      background: vars.$color-bg-secondary;
+      border: 1px solid vars.$color-border;
+      border-radius: vars.$radius-md;
+      padding: vars.$space-lg;
+
+      @include mixins.shadow-md;
+
+      &.error {
+        border-color: vars.$color-gold;
+        color: vars.$color-danger;
+      }
+
+      &.result {
+        color: vars.$color-text-primary;
+
+        h4 {
+          margin-top: 0;
+          font-size: 1.2rem;
+          color: vars.$color-silver;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: vars.$space-md;
+
+          th,
+          td {
+            padding: vars.$space-sm vars.$space-md;
+            border-bottom: 1px solid vars.$color-border;
+            text-align: left;
+            color: vars.$color-text-primary;
+          }
+
+          th {
+            color: vars.$color-silver;
+            font-weight: 600;
+            background: vars.$color-bg-elevated;
+          }
+
+          tr:hover {
+            background: vars.$color-bg-hover;
+          }
+        }
+      }
+    }
+  }
+
+  > div:last-child button {
+    @include mixins.btn-outline;
+    padding: 0.5rem 1rem;
+    border-radius: vars.$radius-md;
+  }
+}

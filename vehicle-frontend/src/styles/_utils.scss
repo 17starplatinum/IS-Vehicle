@@ -1,0 +1,74 @@
+@use 'variables' as vars;
+@use 'mixins' as mix;
+
+.w-100 { width: 100%; }
+.w-50  { width: 50%;  }
+
+.text-center   { text-align: center; }
+.text-right    { text-align: right; }
+.text-left     { text-align: left;  }
+
+.bold          { font-weight: 600;   }
+.semibold      { font-weight: 500;   }
+
+.mt-sm { margin-top: vars.$space-sm; }
+.mt-md { margin-top: vars.$space-md; }
+.mt-lg { margin-top: vars.$space-lg; }
+.mt-xl { margin-top: vars.$space-xl; }
+
+.mb-sm { margin-bottom: vars.$space-sm; }
+.mb-md { margin-bottom: vars.$space-md; }
+.mb-lg { margin-bottom: vars.$space-lg; }
+.mb-xl { margin-bottom: vars.$space-xl; }
+
+.ml-sm { margin-left: vars.$space-sm; }
+.ml-md { margin-left: vars.$space-md; }
+.ml-lg { margin-left: vars.$space-lg; }
+.ml-xl { margin-left: vars.$space-xl; }
+
+.mr-sm { margin-right: vars.$space-sm; }
+.mr-md { margin-right: vars.$space-md; }
+.mr-lg { margin-right: vars.$space-lg; }
+.mr-xl { margin-right: vars.$space-xl; }
+
+.p-sm { padding: vars.$space-sm; }
+.p-md { padding: vars.$space-md; }
+.p-lg { padding: vars.$space-lg; }
+.p-xl { padding: vars.$space-xl; }
+
+.px-md { padding-left: vars.$space-md; padding-right: vars.$space-md; }
+.px-lg { padding-left: vars.$space-lg; padding-right: vars.$space-lg; }
+
+.py-md { padding-top: vars.$space-md; padding-bottom: vars.$space-md; }
+.py-lg { padding-top: vars.$space-lg; padding-bottom: vars.$space-lg; }
+
+.flex         { display: flex; }
+.flex-column  { flex-direction: column; }
+.flex-row     { flex-direction: row; }
+
+.justify-between { justify-content: space-between; }
+.justify-center  { justify-content: center; }
+.justify-start   { justify-content: flex-start; }
+.justify-end     { justify-content: flex-end; }
+
+.items-center    { align-items: center; }
+.items-start     { align-items: flex-start; }
+.items-end       { align-items: flex-end; }
+
+.gap-sm { gap: vars.$space-sm; }
+.gap-md { gap: vars.$space-md; }
+.gap-lg { gap: vars.$space-lg; }
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: vars.$color-border;
+  margin: vars.$space-md 0;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}

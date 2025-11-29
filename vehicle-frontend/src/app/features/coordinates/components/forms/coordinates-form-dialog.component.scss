@@ -1,0 +1,178 @@
+@use '../../../../../styles/index' as *;
+
+:host {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+  color: $color-white;
+}
+
+.coordinates-form-dialog {
+  @include card;
+  padding: $space-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.header {
+  @include flex-between;
+  gap: $space-md;
+
+  h2 {
+    margin: 0;
+    font-size: $fs-lg;
+    font-weight: 700;
+    color: $color-gold;
+  }
+
+  .meta {
+    font-size: $fs-sm;
+    color: $color-silver;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  grid-template-columns: 1fr 300px;
+  align-items: start;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-main {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-md;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+
+  label {
+    font-size: $fs-sm;
+    color: $color-silver;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .control {
+    @include input-base();
+    height: $form-control-height;
+    display: flex;
+    align-items: center;
+    padding: 0 $space-sm;
+    box-sizing: border-box;
+    width: 100%;
+
+    &.select {
+      background: $color-black;
+      border-radius: $radius-sm;
+    }
+
+    &.has-error {
+      border-color: rgba($color-gold, 0.28);
+      box-shadow: 0 0 0 3px rgba($color-gold, 0.06);
+    }
+
+    input, textarea, select {
+      border: none;
+      background: transparent;
+      color: $color-white;
+      width: 100%;
+      font-size: $fs-base;
+      outline: none;
+    }
+  }
+
+  .hint {
+    font-size: $fs-sm;
+    color: $color-silver;
+  }
+
+  .error {
+    font-size: $fs-sm;
+    color: $color-danger;
+    margin-top: 4px;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $space-sm;
+  justify-content: flex-end;
+  margin-top: $space-md;
+
+  button {
+    padding: 8px 14px;
+    border-radius: $radius-sm;
+    border: 1px solid $color-border;
+    background: $color-bg-secondary;
+    color: $color-white;
+    font-weight: 700;
+    cursor: pointer;
+    @include transition(background, transform, border-color);
+
+    &.primary {
+      background: linear-gradient(180deg, rgba($color-gold,0.14), rgba($color-gold,0.06));
+      border-color: rgba($color-gold, 0.28);
+      color: $color-black;
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    &:hover:not(:disabled) { transform: translateY(-2px); }
+  }
+}
+
+.form-errors {
+  background: rgba($color-danger, 0.06);
+  border: 1px solid rgba($color-danger, 0.06);
+  color: $color-danger;
+  padding: $space-sm;
+  border-radius: $radius-sm;
+  font-size: $fs-sm;
+}
+
+.small-muted { font-size: $fs-sm; color: $color-text-muted; }
+
+:focus-visible {
+  outline: 3px solid rgba($color-gold, 0.14);
+  outline-offset: 2px;
+}
+
+@include mobile {
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-side {
+    order: -1;
+  }
+
+  .actions {
+    justify-content: stretch;
+    button { width: 100%; }
+  }
+}

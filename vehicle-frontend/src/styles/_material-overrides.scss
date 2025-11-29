@@ -1,0 +1,178 @@
+@use 'variables' as *;
+
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button {
+  font-family: inherit;
+  text-transform: none;
+  border-radius: 6px;
+
+  .mdc-button__label {
+    font-weight: 500;
+  }
+}
+
+.mat-mdc-button-base.mat-primary {
+  background-color: $color-gold !important;
+  color: white !important;
+}
+
+.mat-mdc-button-base.mat-primary:hover {
+  background-color: $color-silver;
+}
+
+.mat-mdc-raised-button {
+  background-color: $color-gold;
+  color: $color-bg-primary;
+
+  &:hover {
+    background-color: $color-primary-hover;
+  }
+
+  &:disabled {
+    background-color: $color-disabled-bg;
+    color: $color-disabled-text;
+  }
+}
+
+.mat-mdc-outlined-button {
+  border-color: $color-border;
+
+  &:hover {
+    border-color: $color-accent-primary;
+  }
+}
+
+.mdc-text-field {
+  background: $color-bg-primary;
+  border-radius: 6px;
+}
+
+.mat-mdc-text-field-wrapper {
+  padding: 0.45rem 0.75rem !important;
+}
+
+.mat-mdc-form-field-infix {
+  padding: 0 !important;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+  &.mdc-text-field--focused .mdc-notched-outline__leading,
+  &.mdc-text-field--focused .mdc-notched-outline__trailing {
+    border-color: #1976d2 !important;
+    border-width: 3px !important;
+  }
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  padding-inline: 0;
+}
+
+.mat-mdc-table {
+  background: $color-bg-primary;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+}
+
+.mat-mdc-header-row {
+  background: $color-bg-secondary;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 600;
+  border-bottom: 1px solid $color-border;
+}
+
+.mat-mdc-row {
+  border-bottom: 1px solid $color-border;
+
+  &:hover {
+    background: $color-bg-hover;
+  }
+}
+
+.mdc-dialog__surface, 
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #1a1a1a !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18) !important;
+}
+
+.mat-mdc-dialog-content {
+  padding: 2rem !important;
+}
+
+.mat-mdc-dialog-surface {
+  background: $color-bg-primary;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.mat-mdc-tab-header {
+  border-bottom: 1px solid $color-border;
+}
+
+.mat-mdc-tab-labels .mdc-tab {
+  text-transform: none;
+  font-weight: 500;
+}
+
+.mat-mdc-tab--active {
+  color: $color-accent-primary;
+}
+
+.mat-mdc-card {
+  background: $color-bg-primary;
+  border: 1px solid $color-border;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.mat-mdc-card-header-text {
+  font-weight: 600;
+}
+
+.mat-mdc-select {
+  .mat-mdc-select-trigger {
+    border-radius: 6px;
+    border: 1px solid $color-border;
+    padding: 6px 8px;
+
+    &:hover {
+      border-color: $color-accent-primary;
+    }
+  }
+}
+
+.mat-mdc-select-panel,
+.mat-mdc-option  {
+  background: $color-bg-primary !important;;
+  border: 1px solid $color-border;
+}
+
+.mat-mdc-option.mdc-list-item--selected {
+  background: #e3f2fd !important; /* лёгкий голубой */
+  color: black;
+}
+
+.mat-mdc-checkbox {
+  .mdc-checkbox__background {
+    border-color: $color-border;
+  }
+
+  &.mdc-checkbox--checked .mdc-checkbox__background {
+    background-color: $color-accent-primary;
+    border-color: $color-accent-primary;
+  }
+}
+
+.mat-mdc-snack-bar-container {
+  background: $color-bg-secondary;
+  color: $color-text-primary;
+  border: 1px solid $color-border;
+  border-radius: 6px;
+}
+

@@ -1,0 +1,140 @@
+@use '../../../../../styles/index' as *;
+
+:host {
+  display: block;
+  padding: $space-lg;
+  background: $color-bg-primary;
+  color: $color-text;
+}
+
+.vehicle-detail {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+}
+
+.detail-card {
+  @include card;
+  padding: $space-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  .title {
+    font-size: $fs-xl;
+    font-weight: 600;
+    color: $color-gold;
+    margin: 0 0 $space-md 0;
+    border-bottom: 2px solid rgba($color-gold, 0.3);
+    padding-bottom: $space-sm;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-lg;
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: $space-xs;
+
+      .label {
+        font-size: $fs-sm;
+        color: $color-text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+      }
+
+      .value {
+        font-size: $fs-lg;
+        font-weight: 500;
+        color: $color-text;
+      }
+    }
+  }
+
+  .coordinates-block {
+    margin-top: $space-lg;
+    padding: $space-lg;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    background: $color-bg-secondary;
+
+    .coords-title {
+      font-size: $fs-lg;
+      font-weight: 600;
+      margin-bottom: $space-sm;
+      color: $color-silver;
+    }
+
+    .coords-values {
+      display: flex;
+      gap: $space-xl;
+
+      .coord-item {
+        display: flex;
+        flex-direction: column;
+
+        .label {
+          color: $color-text-muted;
+          font-size: $fs-sm;
+        }
+
+        .value {
+          font-size: $fs-lg;
+          font-weight: 500;
+          color: $color-text;
+        }
+      }
+    }
+  }
+
+  .actions {
+    margin-top: $space-lg;
+    display: flex;
+    gap: $space-md;
+
+    button {
+      padding: 10px 16px;
+      border-radius: $radius-sm;
+      border: 1px solid $color-border;
+      background: $color-bg-secondary;
+      color: $color-text;
+      cursor: pointer;
+      font-size: $fs-base;
+      font-weight: 600;
+      transition: background 0.15s ease, transform 0.12s ease;
+
+      &:hover {
+        background: $color-bg-hover;
+        transform: translateY(-1px);
+      }
+
+      &.delete {
+        color: $color-danger;
+        border-color: rgba($color-danger, 0.5);
+
+        &:hover {
+          background: rgba($color-danger, 0.15);
+        }
+      }
+    }
+  }
+}
+
+@include mobile {
+  .detail-card {
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .coords-values {
+      flex-direction: column;
+      gap: $space-md;
+    }
+  }
+}

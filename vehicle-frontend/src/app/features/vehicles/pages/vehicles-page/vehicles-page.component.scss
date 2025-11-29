@@ -1,0 +1,129 @@
+@use '../../../../../styles/variables' as vars;
+@use '../../../../../styles/mixins' as mixins;
+@use '../../../../../styles/utils' as utils;
+@use '../../../../../styles/layout' as layouts;
+
+.vehicles-page {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-lg;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: vars.$space-md;
+
+    h1 {
+      font-size: vars.$fs-xl;
+    }
+  }
+
+  &__filters {
+    @include mixins.card;
+    padding: vars.$space-md;
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$space-md;
+
+    mat-form-field {
+      width: 250px;
+      min-width: 200px;
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: vars.$space-xl;
+  }
+
+  &__table {
+    @include mixins.card;
+    padding: vars.$space-md;
+  }
+
+  &__side-panel {
+    @include mixins.card;
+    padding: vars.$space-md;
+    height: fit-content;
+    position: sticky;
+    top: vars.$space-xl;
+  }
+
+  &__details {
+    @include mixins.card;
+    padding: vars.$space-md;
+    margin-top: vars.$space-lg;
+  }
+}
+
+.table-controls {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.controls-left {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.filters-inline {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.filter-pill {
+  display: flex;
+  margin-right: 16px;
+  margin-bottom: 12px;
+  gap: 0.5rem;
+  align-items: center;
+  background: #1e1e1e;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 0.4rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+
+.filter-field {
+  width: 140px;
+  margin: 0;
+}
+
+.filter-field.small {
+  width: 90px;
+}
+
+.filter-pill button {
+  height: 36px;
+  align-self: center;
+  padding: 0 0.7rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 880px) {
+  .table-controls {
+    align-items: stretch;
+  }
+  .filters-inline {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .filter-pill {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .filter-field {
+    width: 45%;
+  }
+  .filter-field.small {
+    width: 40%;
+  }
+}

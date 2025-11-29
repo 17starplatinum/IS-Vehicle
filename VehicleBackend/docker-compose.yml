@@ -1,0 +1,19 @@
+services:
+  postgres:
+    env_file: .env
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=vehicles
+      - POSTGRES_PORT=5434
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+    driver: local

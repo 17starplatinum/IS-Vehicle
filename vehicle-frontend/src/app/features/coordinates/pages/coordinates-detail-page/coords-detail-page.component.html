@@ -1,0 +1,17 @@
+<ng-template #content>
+  <ng-container *ngIf="coordinates$ | async as coordinates">
+    <div class="detail-header">
+      <h2>ID: {{ coordinates.id }}</h2>
+      <div class="actions">
+        <button mat-button (click)="openEdit(coordinates)">Редактировать</button>
+        <button mat-button color="warn" (click)="delete(coordinates)">Удалить</button>
+      </div>
+    </div>
+
+    <app-coordinates-detail [coordinates$]="coordinates$"></app-coordinates-detail>
+  </ng-container>
+</ng-template>
+
+<ng-template #notFound>
+  <p>Координаты не найдены</p>
+</ng-template>

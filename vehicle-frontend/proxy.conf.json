@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "http://localhost:1488",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/vehicles-updates": {
+    "target": "ws://localhost:1488",
+    "ws": true
+  }
+}

@@ -1,0 +1,23 @@
+<div *ngIf="loading$ | async" class="loading">Загрузка...</div>
+<div *ngIf="(error$ | async) as err" class="error">Ошибка: {{ err?.message || err }}</div>
+
+<ng-container *ngIf="coordinates$ | async as coordinates;">
+  <h2>Координаты #{{coordinates}}</h2>
+
+  <div class="actions">
+    <button mat-flat-button color="primary" (click)="openEdit(coordinates)">Редактировать</button>
+    <button mat-flat-button color="warn" (click)="deleteCoordinates(coordinates)">Удалить</button>
+  </div>
+
+  <mat-card>
+    <mat-card-content>
+      <p><strong>X:</strong> {{ coordinates.x }}</p>
+      <p><strong>Y:</strong> {{ coordinates.y }}</p>
+    </mat-card-content>
+  </mat-card>
+
+</ng-container>
+
+<ng-template #coordinates>
+  <p>Координаты не найдены.</p>
+</ng-template>

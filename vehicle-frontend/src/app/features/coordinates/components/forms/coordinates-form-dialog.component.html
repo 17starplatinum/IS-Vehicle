@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>
+  {{ data.mode === 'create' ? 'Создать' : 'Обновить' }}
+</h1>
+
+<div mat-dialog-content class="coordinates-form-dialog">
+  <form [formGroup]="form" class="form" (ngSubmit)="submit()">
+    <div class="form-main">
+      <div class="row">
+        <mat-form-field appearance="outline" class="w100">
+          <mat-label>X</mat-label>
+          <input matInput type="number" formControlName="x" />
+          <mat-error *ngIf="form.controls['x'].hasError('required')">
+            X обязательное
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w100">
+          <mat-label>Y</mat-label>
+          <input matInput type="number" formControlName="y" />
+          <mat-error *ngIf="form.controls['y'].hasError('required')">
+            Y обязательное
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div *ngIf="form.invalid && (form.touched || form.dirty)" class="form-errors">
+        Пожалуйста, исправьте ошибки в форме.
+      </div>
+    </div>
+  </form>
+  </div>
+<div mat-dialog-actions align="end" class="actions">
+  <button mat-button (click)="dialogRef?.close()">Отмена</button>
+  <button mat-flat-button color="primary" class="primary" (click)="submit()" [disabled]="form.invalid">
+    {{ data.mode === 'create' ? 'Создать' : 'Сохранить' }}
+  </button>
+</div>
